@@ -1,0 +1,18 @@
+﻿#	实体表			
+#	Id		AssetName	EntityGroupName
+#	int		string	string
+#	实体编号	策划备注	资源名称	实体组名称
+	10000	玩家战机	PlayerShip	Aircraft
+	10001	敌人战机	EnemyShip	Aircraft
+	20000	玩家推进器	PlayerEngine	Thruster
+	20001	敌人推进器	EnemyEngine	Thruster
+	30000	默认武器	DefaultWeapon	Weapon
+	40000	默认装甲	DefaultArmor	Armor
+	50000	玩家子弹	PlayerBolt	Bullet
+	50001	敌人子弹	EnemyBolt	Bullet
+	60000	小行星	Asteroid01	Asteroid
+	60001	小行星	Asteroid02	Asteroid
+	60002	小行星	Asteroid03	Asteroid
+	70000	玩家死亡特效	PlayerExplosion	Effect
+	70001	敌人死亡特效	EnemyExplosion	Effect
+	70002	小行星死亡特效	AsteroidExplosion	Effect
