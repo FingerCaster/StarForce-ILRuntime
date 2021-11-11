@@ -425,7 +425,7 @@ namespace UGFExtensions.Hotfix
                 else
                 {
                     //因为所有DLL里面的MonoBehaviour实际都是这个Component，所以我们只能全取出来遍历查找
-                    CrossBindingAdaptorType[] clrInstances = instance.GetComponents(typeof(CrossBindingAdaptorType)).Cast<CrossBindingAdaptorType>().ToArray();
+                    CrossBindingAdaptorType[] clrInstances = instance.GetComponents<CrossBindingAdaptorType>();
                     for (int i = 0; i < clrInstances.Length; i++)
                     {
                         var clrInstance = clrInstances[i];

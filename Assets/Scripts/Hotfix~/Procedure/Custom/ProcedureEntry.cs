@@ -25,7 +25,7 @@ namespace UGFExtensions.Hotfix
                 // //TODO:真机在这里切换到游戏的正式开始场景(流程)
                 // procedureOwner.SetData<VarInt32>(Constant.ProcedureData.NextSceneId, (int)SceneId.TestScene);
                 // ChangeState<ProcedureChangeScene>(procedureOwner);
-               ChangeState<ProcedurePreload>(procedureOwner);
+                ChangeState<ProcedurePreload>(procedureOwner);
             }
         }
     }
