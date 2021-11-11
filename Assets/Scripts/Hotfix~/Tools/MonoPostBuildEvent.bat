@@ -1,7 +1,7 @@
 echo off
 set currentDir=%~dp0
 set targetDir=%1
-set hotfixDllDir=%currentDir%..\..\..\..\Res\HotfixDll\
+set hotfixDllDir=%currentDir%..\..\..\Res\HotfixDll\
 if not exist %hotfixDllDir% ( 
 	md %hotfixDllDir% 
 )
