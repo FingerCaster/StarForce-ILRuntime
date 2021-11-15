@@ -47,6 +47,12 @@ namespace UGFExtensions.Hotfix
                 new LoadHotfixDataTableUserData(dataTableName, userData));
         }
 
+        public static void LoadDataTableRowConfig<T>(this DataTableExtensionComponent dataTableExtension,string assetName, string dataTableName, bool isCacheFileStream = true)
+            where T : HotfixDataRowBase
+        {
+            dataTableExtension.LoadDataTableRowConfig<DRHotfix>(assetName, dataTableName, isCacheFileStream);
+        }
+
         public static T GetDataRow<T>(this DataTableExtensionComponent dataTableExtension, string dataTableName, int id)
             where T : HotfixDataRowBase
         {

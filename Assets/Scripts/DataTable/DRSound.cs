@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2021-10-29 14:23:00.416
+// 生成时间：2021-11-15 16:53:37.544
 //------------------------------------------------------------
 
 using GameFramework;
@@ -15,14 +15,14 @@ using UnityGameFramework.Runtime;
 namespace UGFExtensions
 {
     /// <summary>
-    /// 推进器表。
+    /// 声音配置表。
     /// </summary>
-    public class DRThruster : DataRowBase
+    public class DRSound : DataRowBase
     {
         private int m_Id = 0;
 
         /// <summary>
-        /// 获取推进器编号。
+        /// 获取声音编号。
         /// </summary>
         public override int Id
         {
@@ -33,9 +33,54 @@ namespace UGFExtensions
         }
 
         /// <summary>
-        /// 获取。
+        /// 获取资源名称。
         /// </summary>
-        public float Speed
+        public string AssetName
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取优先级（默认0，128最高，-128最低）。
+        /// </summary>
+        public int Priority
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取是否循环。
+        /// </summary>
+        public bool Loop
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取音量（0~1）。
+        /// </summary>
+        public float Volume
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取声音空间混合量（0为2D，1为3D，中间值混合效果）。
+        /// </summary>
+        public float SpatialBlend
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取声音最大距离。
+        /// </summary>
+        public float MaxDistance
         {
             get;
             private set;
@@ -53,7 +98,12 @@ namespace UGFExtensions
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             index++;
-			Speed = float.Parse(columnStrings[index++]);
+			AssetName = columnStrings[index++];
+			Priority = int.Parse(columnStrings[index++]);
+			Loop = bool.Parse(columnStrings[index++]);
+			Volume = float.Parse(columnStrings[index++]);
+			SpatialBlend = float.Parse(columnStrings[index++]);
+			MaxDistance = float.Parse(columnStrings[index++]);
             GeneratePropertyArray();
             return true;
         }
@@ -65,7 +115,12 @@ namespace UGFExtensions
                 using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
-                    Speed = binaryReader.ReadSingle();
+                    AssetName = binaryReader.ReadString();
+                    Priority = binaryReader.Read7BitEncodedInt32();
+                    Loop = binaryReader.ReadBoolean();
+                    Volume = binaryReader.ReadSingle();
+                    SpatialBlend = binaryReader.ReadSingle();
+                    MaxDistance = binaryReader.ReadSingle();
                 }
             }
 

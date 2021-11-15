@@ -154,13 +154,13 @@ namespace UGFExtensions
         }
 
 
-        public T GetDataRow<T>(int id) where T : class, IDataRow, new() =>
-            InternalGetDataRow<T>(new TypeNamePair(typeof(T)), id);
+        public T GetDataRow<T>(int id,object userdata = null) where T : class, IDataRow, new() =>
+            InternalGetDataRow<T>(new TypeNamePair(typeof(T)), id,userdata);
 
-        public T GetDataRow<T>(string dataTableName, int id) where T : class, IDataRow, new() =>
-            InternalGetDataRow<T>(new TypeNamePair(typeof(T), dataTableName), id);
+        public T GetDataRow<T>(string dataTableName, int id,object userdata = null) where T : class, IDataRow, new() =>
+            InternalGetDataRow<T>(new TypeNamePair(typeof(T), dataTableName), id,userdata);
 
-        private T InternalGetDataRow<T>(TypeNamePair typeNamePair, int id) where T : class, IDataRow, new()
+        private T InternalGetDataRow<T>(TypeNamePair typeNamePair, int id,object userdata = null) where T : class, IDataRow, new()
         {
             m_DataTableRowConfigs.TryGetValue(typeNamePair, out var config);
             if (config == null) return default;
@@ -174,35 +174,35 @@ namespace UGFExtensions
 
             if (config.FileStream != null)
             {
-                AddDataRow(dataTableBase, config.FileStream, value.StartIndex, value.Length);
+                AddDataRow(dataTableBase, config.FileStream, value.StartIndex, value.Length,userdata);
             }
             else
             {
                 using (IFileStream fileStream = FileStreamHelper.CreateFileStream(config.Path))
                 {
-                    AddDataRow(dataTableBase, fileStream, value.StartIndex, value.Length);
+                    AddDataRow(dataTableBase, fileStream, value.StartIndex, value.Length,userdata);
                 }
             }
 
             return dataTableBase.GetDataRow(id);
         }
 
-        private void AddDataRow<T>(IDataTable<T> dataTable, IFileStream fileStream, int startIndex, int length)
+        private void AddDataRow<T>(IDataTable<T> dataTable, IFileStream fileStream, int startIndex, int length,object userdata = null)
             where T : class, IDataRow, new()
         {
             fileStream.Seek(startIndex, SeekOrigin.Begin);
             EnsureBufferSize(length);
             long readLength = fileStream.Read(m_Buffer, 0, length);
-            dataTable.AddDataRow(m_Buffer, 0, (int)readLength, null);
+            dataTable.AddDataRow(m_Buffer, 0, (int)readLength, userdata);
         }
 
-        public T[] GetAllDataRows<T>() where T : class, IDataRow, new() =>
-            InternalGetAllDataRows<T>(new TypeNamePair(typeof(T)));
+        public T[] GetAllDataRows<T>(object userdata = null) where T : class, IDataRow, new() =>
+            InternalGetAllDataRows<T>(new TypeNamePair(typeof(T)),userdata);
 
-        public T[] GetAllDataRows<T>(string dataTableName) where T : class, IDataRow, new() =>
-            InternalGetAllDataRows<T>(new TypeNamePair(typeof(T), dataTableName));
+        public T[] GetAllDataRows<T>(string dataTableName,object userdata = null) where T : class, IDataRow, new() =>
+            InternalGetAllDataRows<T>(new TypeNamePair(typeof(T), dataTableName),userdata);
 
-        private T[] InternalGetAllDataRows<T>(TypeNamePair typeNamePair) where T : class, IDataRow, new()
+        private T[] InternalGetAllDataRows<T>(TypeNamePair typeNamePair,object userdata = null) where T : class, IDataRow, new()
         {
             m_DataTableRowConfigs.TryGetValue(typeNamePair, out var config);
             if (config == null) return default;
@@ -219,7 +219,7 @@ namespace UGFExtensions
                     }
 
                     AddDataRow(dataTableBase, fileStream, dataTableSetting.Value.StartIndex,
-                        dataTableSetting.Value.Length);
+                        dataTableSetting.Value.Length,userdata);
                 }
 
                 return dataTableBase.GetAllDataRows();

@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2021-10-29 14:23:00.412
+// 生成时间：2021-11-15 16:53:37.553
 //------------------------------------------------------------
 
 using GameFramework;
@@ -15,14 +15,14 @@ using UnityGameFramework.Runtime;
 namespace UGFExtensions
 {
     /// <summary>
-    /// 声音配置表。
+    /// 界面配置表。
     /// </summary>
-    public class DRSound : DataRowBase
+    public class DRUIForm : DataRowBase
     {
         private int m_Id = 0;
 
         /// <summary>
-        /// 获取声音编号。
+        /// 获取界面编号。
         /// </summary>
         public override int Id
         {
@@ -42,45 +42,27 @@ namespace UGFExtensions
         }
 
         /// <summary>
-        /// 获取优先级（默认0，128最高，-128最低）。
+        /// 获取界面组名称。
         /// </summary>
-        public int Priority
+        public string UIGroupName
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取是否循环。
+        /// 获取是否允许多个界面实例。
         /// </summary>
-        public bool Loop
+        public bool AllowMultiInstance
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取音量（0~1）。
+        /// 获取是否暂停被其覆盖的界面。
         /// </summary>
-        public float Volume
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取声音空间混合量（0为2D，1为3D，中间值混合效果）。
-        /// </summary>
-        public float SpatialBlend
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取声音最大距离。
-        /// </summary>
-        public float MaxDistance
+        public bool PauseCoveredUIForm
         {
             get;
             private set;
@@ -99,11 +81,9 @@ namespace UGFExtensions
             m_Id = int.Parse(columnStrings[index++]);
             index++;
 			AssetName = columnStrings[index++];
-			Priority = int.Parse(columnStrings[index++]);
-			Loop = bool.Parse(columnStrings[index++]);
-			Volume = float.Parse(columnStrings[index++]);
-			SpatialBlend = float.Parse(columnStrings[index++]);
-			MaxDistance = float.Parse(columnStrings[index++]);
+			UIGroupName = columnStrings[index++];
+			AllowMultiInstance = bool.Parse(columnStrings[index++]);
+			PauseCoveredUIForm = bool.Parse(columnStrings[index++]);
             GeneratePropertyArray();
             return true;
         }
@@ -116,11 +96,9 @@ namespace UGFExtensions
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     AssetName = binaryReader.ReadString();
-                    Priority = binaryReader.Read7BitEncodedInt32();
-                    Loop = binaryReader.ReadBoolean();
-                    Volume = binaryReader.ReadSingle();
-                    SpatialBlend = binaryReader.ReadSingle();
-                    MaxDistance = binaryReader.ReadSingle();
+                    UIGroupName = binaryReader.ReadString();
+                    AllowMultiInstance = binaryReader.ReadBoolean();
+                    PauseCoveredUIForm = binaryReader.ReadBoolean();
                 }
             }
 

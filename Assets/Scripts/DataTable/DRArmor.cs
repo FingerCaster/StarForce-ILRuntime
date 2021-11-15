@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2021-10-29 14:23:00.422
+// 生成时间：2021-11-15 16:53:37.519
 //------------------------------------------------------------
 
 using GameFramework;
@@ -15,14 +15,14 @@ using UnityGameFramework.Runtime;
 namespace UGFExtensions
 {
     /// <summary>
-    /// 声音配置表。
+    /// 装甲表。
     /// </summary>
-    public class DRUISound : DataRowBase
+    public class DRArmor : DataRowBase
     {
         private int m_Id = 0;
 
         /// <summary>
-        /// 获取声音编号。
+        /// 获取装甲编号。
         /// </summary>
         public override int Id
         {
@@ -33,27 +33,18 @@ namespace UGFExtensions
         }
 
         /// <summary>
-        /// 获取资源名称。
+        /// 获取最大生命。
         /// </summary>
-        public string AssetName
+        public int MaxHP
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取优先级（默认0，128最高，-128最低）。
+        /// 获取防御力。
         /// </summary>
-        public int Priority
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 获取音量（0~1）。
-        /// </summary>
-        public float Volume
+        public int Defense
         {
             get;
             private set;
@@ -71,9 +62,8 @@ namespace UGFExtensions
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             index++;
-			AssetName = columnStrings[index++];
-			Priority = int.Parse(columnStrings[index++]);
-			Volume = float.Parse(columnStrings[index++]);
+			MaxHP = int.Parse(columnStrings[index++]);
+			Defense = int.Parse(columnStrings[index++]);
             GeneratePropertyArray();
             return true;
         }
@@ -85,9 +75,8 @@ namespace UGFExtensions
                 using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
-                    AssetName = binaryReader.ReadString();
-                    Priority = binaryReader.Read7BitEncodedInt32();
-                    Volume = binaryReader.ReadSingle();
+                    MaxHP = binaryReader.Read7BitEncodedInt32();
+                    Defense = binaryReader.Read7BitEncodedInt32();
                 }
             }
 

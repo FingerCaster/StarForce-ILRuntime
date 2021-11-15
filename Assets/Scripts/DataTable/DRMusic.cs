@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2021-10-29 14:23:00.394
+// 生成时间：2021-11-15 16:53:37.535
 //------------------------------------------------------------
 
 using GameFramework;
@@ -15,14 +15,14 @@ using UnityGameFramework.Runtime;
 namespace UGFExtensions
 {
     /// <summary>
-    /// 实体表。
+    /// 音乐配置表。
     /// </summary>
-    public class DREntity : DataRowBase
+    public class DRMusic : DataRowBase
     {
         private int m_Id = 0;
 
         /// <summary>
-        /// 获取实体编号。
+        /// 获取音乐编号。
         /// </summary>
         public override int Id
         {
@@ -41,15 +41,6 @@ namespace UGFExtensions
             private set;
         }
 
-        /// <summary>
-        /// 获取实体组名称。
-        /// </summary>
-        public string EntityGroupName
-        {
-            get;
-            private set;
-        }
-
         public override bool ParseDataRow(string dataRowString, object userData)
         {
             string[] columnStrings = dataRowString.Split(DataTableExtension.DataSplitSeparators);
@@ -63,7 +54,6 @@ namespace UGFExtensions
             m_Id = int.Parse(columnStrings[index++]);
             index++;
 			AssetName = columnStrings[index++];
-			EntityGroupName = columnStrings[index++];
             GeneratePropertyArray();
             return true;
         }
@@ -76,7 +66,6 @@ namespace UGFExtensions
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     AssetName = binaryReader.ReadString();
-                    EntityGroupName = binaryReader.ReadString();
                 }
             }
 

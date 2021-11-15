@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2021-10-29 14:23:00.386
+// 生成时间：2021-11-15 16:53:37.561
 //------------------------------------------------------------
 
 using GameFramework;
@@ -15,14 +15,14 @@ using UnityGameFramework.Runtime;
 namespace UGFExtensions
 {
     /// <summary>
-    /// 装甲表。
+    /// 武器表。
     /// </summary>
-    public class DRArmor : DataRowBase
+    public class DRWeapon : DataRowBase
     {
         private int m_Id = 0;
 
         /// <summary>
-        /// 获取装甲编号。
+        /// 获取武器编号。
         /// </summary>
         public override int Id
         {
@@ -33,18 +33,45 @@ namespace UGFExtensions
         }
 
         /// <summary>
-        /// 获取最大生命。
+        /// 获取攻击力。
         /// </summary>
-        public int MaxHP
+        public int Attack
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 获取防御力。
+        /// 获取攻击间隔。
         /// </summary>
-        public int Defense
+        public float AttackInterval
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取子弹编号。
+        /// </summary>
+        public int BulletId
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取子弹速度。
+        /// </summary>
+        public float BulletSpeed
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取子弹声音编号。
+        /// </summary>
+        public int BulletSoundId
         {
             get;
             private set;
@@ -62,8 +89,11 @@ namespace UGFExtensions
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             index++;
-			MaxHP = int.Parse(columnStrings[index++]);
-			Defense = int.Parse(columnStrings[index++]);
+			Attack = int.Parse(columnStrings[index++]);
+			AttackInterval = float.Parse(columnStrings[index++]);
+			BulletId = int.Parse(columnStrings[index++]);
+			BulletSpeed = float.Parse(columnStrings[index++]);
+			BulletSoundId = int.Parse(columnStrings[index++]);
             GeneratePropertyArray();
             return true;
         }
@@ -75,8 +105,11 @@ namespace UGFExtensions
                 using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
-                    MaxHP = binaryReader.Read7BitEncodedInt32();
-                    Defense = binaryReader.Read7BitEncodedInt32();
+                    Attack = binaryReader.Read7BitEncodedInt32();
+                    AttackInterval = binaryReader.ReadSingle();
+                    BulletId = binaryReader.Read7BitEncodedInt32();
+                    BulletSpeed = binaryReader.ReadSingle();
+                    BulletSoundId = binaryReader.Read7BitEncodedInt32();
                 }
             }
 
