@@ -8,6 +8,10 @@
 using GameFramework;
 using GameFramework.Entity;
 using System;
+using ILRuntime.CLR.TypeSystem;
+using ILRuntime.Reflection;
+using ILRuntime.Runtime.Enviorment;
+using ILRuntime.Runtime.Intepreter;
 using UnityEngine;
 
 namespace UnityGameFramework.Runtime
@@ -27,10 +31,7 @@ namespace UnityGameFramework.Runtime
         /// </summary>
         public int Id
         {
-            get
-            {
-                return m_Id;
-            }
+            get { return m_Id; }
         }
 
         /// <summary>
@@ -38,10 +39,7 @@ namespace UnityGameFramework.Runtime
         /// </summary>
         public string EntityAssetName
         {
-            get
-            {
-                return m_EntityAssetName;
-            }
+            get { return m_EntityAssetName; }
         }
 
         /// <summary>
@@ -49,10 +47,7 @@ namespace UnityGameFramework.Runtime
         /// </summary>
         public object Handle
         {
-            get
-            {
-                return gameObject;
-            }
+            get { return gameObject; }
         }
 
         /// <summary>
@@ -60,10 +55,7 @@ namespace UnityGameFramework.Runtime
         /// </summary>
         public IEntityGroup EntityGroup
         {
-            get
-            {
-                return m_EntityGroup;
-            }
+            get { return m_EntityGroup; }
         }
 
         /// <summary>
@@ -71,10 +63,7 @@ namespace UnityGameFramework.Runtime
         /// </summary>
         public EntityLogic Logic
         {
-            get
-            {
-                return m_EntityLogic;
-            }
+            get { return m_EntityLogic; }
         }
 
         /// <summary>
@@ -85,7 +74,8 @@ namespace UnityGameFramework.Runtime
         /// <param name="entityGroup">实体所属的实体组。</param>
         /// <param name="isNewInstance">是否是新实例。</param>
         /// <param name="userData">用户自定义数据。</param>
-        public void OnInit(int entityId, string entityAssetName, IEntityGroup entityGroup, bool isNewInstance, object userData)
+        public void OnInit(int entityId, string entityAssetName, IEntityGroup entityGroup, bool isNewInstance,
+            object userData)
         {
             m_Id = entityId;
             m_EntityAssetName = entityAssetName;
@@ -106,13 +96,17 @@ namespace UnityGameFramework.Runtime
                 Log.Error("Entity logic type is invalid.");
                 return;
             }
-            
-            m_EntityLogic = gameObject.GetComponent<EntityLogic>();
+
+            if (!CheckLogicChanged(showEntityInfo))
+            {
+                return;
+            }
             if (m_EntityLogic == null)
             {
                 Log.Error("Entity '{0}' can not add entity logic.", entityAssetName);
                 return;
             }
+
             try
             {
                 m_EntityLogic.OnInit(showEntityInfo.UserData);
@@ -121,6 +115,80 @@ namespace UnityGameFramework.Runtime
             {
                 Log.Error("Entity '[{0}]{1}' OnInit with exception '{2}'.", m_Id, m_EntityAssetName, exception);
             }
+        }
+
+        /// <summary>
+        /// 检查逻辑是否变更
+        /// </summary>
+        /// <param name="showEntityInfo"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public bool CheckLogicChanged(ShowEntityInfo showEntityInfo)
+        {
+            if (m_EntityLogic != null)
+            {
+                if (m_EntityLogic is CrossBindingAdaptorType crossBindingAdaptorType)
+                {
+                    var type1 = crossBindingAdaptorType.ILInstance.Type;
+                    if (showEntityInfo.EntityLogicType is ILRuntimeType type2 && type1 == type2.ILType)
+                    {
+                        m_EntityLogic.enabled = true;
+                    }
+                    else
+                    {
+                        Destroy(m_EntityLogic);
+                        m_EntityLogic = null;
+                    }
+                }
+                else
+                {
+                    if (m_EntityLogic.GetType() == showEntityInfo.EntityLogicType)
+                    {
+                        m_EntityLogic.enabled = true;
+                    }
+                    else
+                    {
+                        Destroy(m_EntityLogic);
+                        m_EntityLogic = null;
+                    }
+                }
+            }
+
+            if (m_EntityLogic == null)
+            {
+                if (showEntityInfo.EntityLogicType is ILRuntimeType ilRuntimeType)
+                {
+                    ILType type = ilRuntimeType.ILType;
+                    if (type == null)
+                    {
+                        throw new Exception($"Can not find hotfix mono behaviour {type}");
+                    }
+
+                    //热更DLL内的类型比较麻烦。首先我们得自己手动创建实例
+                    var ilInstance = new ILTypeInstance(type, false); //手动创建实例是因为默认方式会new MonoBehaviour，这在Unity里不允许
+                    //接下来创建Adapter实例
+                    Type adapterType = type.FirstCLRBaseType.TypeForCLR;
+                    EntityLogic clrInstance = gameObject.AddComponent(adapterType) as EntityLogic;
+                    //unity创建的实例并没有热更DLL里面的实例，所以需要手动赋值
+                    if (clrInstance is IAdapterProperty adapterProperty)
+                    {
+                        adapterProperty.ILInstance = ilInstance;
+                        adapterProperty.AppDomain = ilRuntimeType.ILType.AppDomain;
+                    }
+
+                    //这个实例默认创建的CLRInstance不是通过AddComponent出来的有效实例，所以得手动替换
+                    ilInstance.CLRInstance = clrInstance;
+                    m_EntityLogic = clrInstance;
+                }
+                else
+                {
+                    m_EntityLogic =  (EntityLogic) gameObject.AddComponent(showEntityInfo.EntityLogicType);
+                }
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -185,7 +253,8 @@ namespace UnityGameFramework.Runtime
             AttachEntityInfo attachEntityInfo = (AttachEntityInfo)userData;
             try
             {
-                m_EntityLogic.OnAttached(((Entity)childEntity).Logic, attachEntityInfo.ParentTransform, attachEntityInfo.UserData);
+                m_EntityLogic.OnAttached(((Entity)childEntity).Logic, attachEntityInfo.ParentTransform,
+                    attachEntityInfo.UserData);
             }
             catch (Exception exception)
             {
@@ -220,7 +289,8 @@ namespace UnityGameFramework.Runtime
             AttachEntityInfo attachEntityInfo = (AttachEntityInfo)userData;
             try
             {
-                m_EntityLogic.OnAttachTo(((Entity)parentEntity).Logic, attachEntityInfo.ParentTransform, attachEntityInfo.UserData);
+                m_EntityLogic.OnAttachTo(((Entity)parentEntity).Logic, attachEntityInfo.ParentTransform,
+                    attachEntityInfo.UserData);
             }
             catch (Exception exception)
             {

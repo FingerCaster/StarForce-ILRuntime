@@ -47,7 +47,7 @@ namespace UGFExtensions
 
         private int InternalGetCount(TypeNamePair typeNamePair)
         {
-            if (m_DataTableRowConfigs.TryGetValue(typeNamePair, out var config))
+            if (!m_DataTableRowConfigs.TryGetValue(typeNamePair, out var config))
             {
                 throw new Exception("GetCount must be load datatable row config !");
             }

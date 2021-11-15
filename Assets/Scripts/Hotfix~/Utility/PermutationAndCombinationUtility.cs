@@ -11,9 +11,7 @@ namespace UGFExtensions.Hotfix
         /// <param name="b">变量2</param>
         public static void Swap(ref T a, ref T b)
         {
-            var temp = a;
-            a = b;
-            b = temp;
+            (a, b) = (b, a);
         }
 
         /// <summary>
