@@ -14,11 +14,201 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rules:
   - valid: 1
-    name: Sprites
+    name: 
     variant: 
     fileSystem: 
     groups: 
-    assetsDirectoryPath: Assets/Res/Sprites
+    assetsDirectoryPath: Assets/Res/Configs
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: DefaultConfig.*
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/DataTables
+    loadType: 4
+    packed: 1
+    filterType: 1
+    searchPatterns: '*.bytes'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/DataTables/Hotfix
+    loadType: 4
+    packed: 1
+    filterType: 1
+    searchPatterns: '*.bytes'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/Entities
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/Fonts
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/HotfixDll
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.bytes'
+  - valid: 1
+    name: Res/Localization/Dictionaries
+    variant: zh-cn
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/Localization/ChineseSimplified/Dictionaries
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: Res/Localization/Dictionaries
+    variant: zh-tw
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/Localization/ChineseTraditional/Dictionaries
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: Res/Localization/Dictionaries
+    variant: en-us
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/Localization/English/Dictionaries
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: Res/Localization/Dictionaries
+    variant: ko-kr
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/Localization/Korean/Dictionaries
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/Materials
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/Meshes
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/Music
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/Scenes
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/Sounds
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/Textures
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/UI/UIForms
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/UI/UIItems
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/UI/UISounds
+    loadType: 0
+    packed: 1
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: 
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/Res/UI/UISprites
     loadType: 0
     packed: 1
     filterType: 2

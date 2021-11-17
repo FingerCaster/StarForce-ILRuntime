@@ -74,6 +74,7 @@ namespace UGFExtensions.Build.Editor
             versionInfoData.VersionListHashCode = versionListHashCode;
             versionInfoData.VersionListCompressedLength = versionListZipLength;
             versionInfoData.VersionListCompressedHashCode = versionListZipHashCode;
+            EditorUtility.SetDirty(versionInfoEditorData);
             AssetDatabase.SaveAssets();
 
             if (versionInfoEditorData.IsGenerateToFullPath)

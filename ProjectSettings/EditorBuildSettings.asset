@@ -14,7 +14,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Res/Scenes/Menu.unity
     guid: b031b4f2980561542a7f7ba41391edc3
-  - enabled: 1
-    path: Assets/Res/Scenes/StarForce Launcher.unity
-    guid: ba6217672fd28cc4391ee97ebbc2b61c
   m_configObjects: {}

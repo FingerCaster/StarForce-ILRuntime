@@ -27,6 +27,7 @@ namespace UGFExtensions.Hotfix
             RegisterComponentCLRRedirection(appDomain);
             RegisterGameObjectCLRRedirection(appDomain);
             RegisterReferencePoolCLRRedirection(appDomain);
+            RegisterTypeCLRRedirection(appDomain);
             //适配委托
 
             //GF用

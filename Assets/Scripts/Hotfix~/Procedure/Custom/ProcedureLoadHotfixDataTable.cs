@@ -25,42 +25,42 @@ namespace UGFExtensions.Hotfix
             // Debug.Log(drEntity1.Id);
         }
         
-        private void OnLoadDataTableSuccess(object sender, GameEventArgs e)
-        {
-            LoadDataTableSuccessEventArgs eventArgs = (LoadDataTableSuccessEventArgs)e;
-            if (!(eventArgs.UserData is LoadHotfixDataTableUserData hotfixDataTableUserData))
-            {
-                return;
-            }
-
-            if (hotfixDataTableUserData.UserData != this)
-            {
-                return;
-            }
-
-            var drHotfixes = GameEntry.DataTable.GetDataTable<DRHotfix>("Entity1");
-            var drEntity1 = drHotfixes.GetDataRow<DREntity1>(10001);
-            if (drEntity1 == null)
-                return;
-            Log.Info(
-                $"{drEntity1.Id}    TestEnum:{drEntity1.AssetName}   TestEnum1:{drEntity1.EntityGroupName}");
-        }
-
-        private void OnLoadDataTableFailure(object sender, GameEventArgs e)
-        {
-            LoadDataTableFailureEventArgs eventArgs = (LoadDataTableFailureEventArgs)e;
-            if (!(eventArgs.UserData is LoadHotfixDataTableUserData hotfixDataTableUserData))
-            {
-                return;
-            }
-
-            if (hotfixDataTableUserData.UserData != this)
-            {
-                return;
-            }
-
-            Log.Error("Can not load data table '{0}' from '{1}' with error message '{2}'.",
-                eventArgs.DataTableAssetName, eventArgs.DataTableAssetName, eventArgs.ErrorMessage);
-        }
+        // private void OnLoadDataTableSuccess(object sender, GameEventArgs e)
+        // {
+        //     LoadDataTableSuccessEventArgs eventArgs = (LoadDataTableSuccessEventArgs)e;
+        //     if (!(eventArgs.UserData is LoadHotfixDataTableUserData hotfixDataTableUserData))
+        //     {
+        //         return;
+        //     }
+        //
+        //     if (hotfixDataTableUserData.UserData != this)
+        //     {
+        //         return;
+        //     }
+        //
+        //     var drHotfixes = GameEntry.DataTable.GetDataTable<DRHotfix>("Entity1");
+        //     var drEntity1 = drHotfixes.GetDataRow<DREntity1>(10001);
+        //     if (drEntity1 == null)
+        //         return;
+        //     Log.Info(
+        //         $"{drEntity1.Id}    TestEnum:{drEntity1.AssetName}   TestEnum1:{drEntity1.EntityGroupName}");
+        // }
+        //
+        // private void OnLoadDataTableFailure(object sender, GameEventArgs e)
+        // {
+        //     LoadDataTableFailureEventArgs eventArgs = (LoadDataTableFailureEventArgs)e;
+        //     if (!(eventArgs.UserData is LoadHotfixDataTableUserData hotfixDataTableUserData))
+        //     {
+        //         return;
+        //     }
+        //
+        //     if (hotfixDataTableUserData.UserData != this)
+        //     {
+        //         return;
+        //     }
+        //
+        //     Log.Error("Can not load data table '{0}' from '{1}' with error message '{2}'.",
+        //         eventArgs.DataTableAssetName, eventArgs.DataTableAssetName, eventArgs.ErrorMessage);
+        // }
     }
 }

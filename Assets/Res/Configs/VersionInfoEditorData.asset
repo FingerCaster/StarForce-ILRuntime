@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f84dac6a330c478988ed9b2576369bfe, type: 3}
+  m_Name: VersionInfoEditorData
+  m_EditorClassIdentifier: 
+  m_Active: Normal
+  m_ActiveIndex: 0
+  m_VersionInfos:
+  - m_Key: Normal
+    m_Value:
+      m_ForceUpdateGame: 0
+      m_LatestGameVersion: 1.0
+      m_InternalGameVersion: 3
+      m_UpdatePrefixUri: 
+      m_VersionListLength: 6679
+      m_InternalResourceVersion: 3
+      m_VersionListHashCode: 589639288
+      m_VersionListCompressedLength: 2610
+      m_VersionListCompressedHashCode: 554600827
+      m_IsShowCanNotChangeProperty: 1
+  m_IsGenerateToFullPath: 0
+  m_OutPath: G:/Github/StarForce-ILRuntime/AssetBundle/Full/version.txt

@@ -18,10 +18,7 @@ namespace UGFExtensions
 
         public override bool UseNativeDialog
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override void OnEnter(ProcedureOwner procedureOwner)
@@ -66,6 +63,7 @@ namespace UGFExtensions
             if (m_UpdateResourceForm != null)
             {
                 Object.Destroy(m_UpdateResourceForm.gameObject);
+                GameEntry.BuiltinData.UpdateResourceFormTemplate.SetCamera(null);
                 m_UpdateResourceForm = null;
             }
 
@@ -93,6 +91,8 @@ namespace UGFExtensions
         {
             if (m_UpdateResourceForm == null)
             {
+                GameEntry.BuiltinData.UpdateResourceFormTemplate.SetCamera(GameEntry.UI.gameObject
+                    .GetComponentInChildren<Camera>());
                 m_UpdateResourceForm = Object.Instantiate(GameEntry.BuiltinData.UpdateResourceFormTemplate);
             }
 
@@ -109,7 +109,10 @@ namespace UGFExtensions
             }
 
             float progressTotal = (float)currentTotalUpdateLength / m_UpdateTotalCompressedLength;
-            string descriptionText = GameEntry.Localization.GetString("UpdateResource.Tips", m_UpdateSuccessCount.ToString(), m_UpdateCount.ToString(), GetByteLengthString(currentTotalUpdateLength), GetByteLengthString(m_UpdateTotalCompressedLength), progressTotal, GetByteLengthString((int)GameEntry.Download.CurrentSpeed));
+            string descriptionText = GameEntry.Localization.GetString("UpdateResource.Tips",
+                m_UpdateSuccessCount.ToString(), m_UpdateCount.ToString(),
+                GetByteLengthString(currentTotalUpdateLength), GetByteLengthString(m_UpdateTotalCompressedLength),
+                progressTotal, GetByteLengthString((int)GameEntry.Download.CurrentSpeed));
             m_UpdateResourceForm.SetProgress(progressTotal, descriptionText);
         }
 
@@ -220,12 +223,14 @@ namespace UGFExtensions
             ResourceUpdateFailureEventArgs ne = (ResourceUpdateFailureEventArgs)e;
             if (ne.RetryCount >= ne.TotalRetryCount)
             {
-                Log.Error("Update resource '{0}' failure from '{1}' with error message '{2}', retry count '{3}'.", ne.Name, ne.DownloadUri, ne.ErrorMessage, ne.RetryCount.ToString());
+                Log.Error("Update resource '{0}' failure from '{1}' with error message '{2}', retry count '{3}'.",
+                    ne.Name, ne.DownloadUri, ne.ErrorMessage, ne.RetryCount.ToString());
                 return;
             }
             else
             {
-                Log.Info("Update resource '{0}' failure from '{1}' with error message '{2}', retry count '{3}'.", ne.Name, ne.DownloadUri, ne.ErrorMessage, ne.RetryCount.ToString());
+                Log.Info("Update resource '{0}' failure from '{1}' with error message '{2}', retry count '{3}'.",
+                    ne.Name, ne.DownloadUri, ne.ErrorMessage, ne.RetryCount.ToString());
             }
 
             for (int i = 0; i < m_UpdateLengthData.Count; i++)
@@ -252,17 +257,10 @@ namespace UGFExtensions
 
             public string Name
             {
-                get
-                {
-                    return m_Name;
-                }
+                get { return m_Name; }
             }
 
-            public int Length
-            {
-                get;
-                set;
-            }
+            public int Length { get; set; }
         }
     }
 }

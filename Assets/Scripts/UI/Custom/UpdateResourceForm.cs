@@ -11,14 +11,11 @@ namespace UGFExtensions
         [SerializeField]
         private Slider m_ProgressSlider = null;
 
-        private void Start()
+        [SerializeField] private Canvas m_Canvas;
+
+        public void SetCamera(Camera uiCamera)
         {
-
-        }
-
-        private void Update()
-        {
-
+            m_Canvas.worldCamera = uiCamera;
         }
 
         public void SetProgress(float progress, string description)
