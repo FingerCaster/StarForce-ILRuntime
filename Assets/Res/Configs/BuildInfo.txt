@@ -1,7 +1,8 @@
 {
-  "CheckVersionUrl": "/{0}Version.txt",
-  "StandaloneAppUrl": "http://???",
-  "IosAppUrl": "http://???",
-  "AndroidAppUrl": "http://???",
+  "CheckVersionUrl": "http://127.0.0.1/resources/{0}Version.txt",
+  "WindowsAppUrl": "http://www.baidu.com",
+  "MacOSAppUrl": "http://www.baidu.com",
+  "IOSAppUrl": "http://www.baidu.com",
+  "AndroidAppUrl": "http://www.baidu.com",
   "END_OF_JSON": ""
 }
