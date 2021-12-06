@@ -179,7 +179,6 @@
     <Compile Include="UI\Custom\BindComponents\MenuForm.BindComponents.cs" />
     <Compile Include="UI\Custom\SettingForm.cs" />
     <Compile Include="UI\Custom\BindComponents\SettingForm.BindComponents.cs" />
-    <Compile Include="Entity\Custom\EntityLogic\BindComponents\TestEntityLogic.BindComponents.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
