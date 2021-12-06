@@ -2,20 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using ILRuntime.CLR.Method;
-using ILRuntime.CLR.TypeSystem;
 using ILRuntime.CLR.Utils;
 using ILRuntime.Reflection;
-using ILRuntime.Runtime.Enviorment;
 using ILRuntime.Runtime.Intepreter;
 using ILRuntime.Runtime.Stack;
-using UnityGameFramework.Runtime;
 using AppDomain = ILRuntime.Runtime.Enviorment.AppDomain;
-using CLR = ILRuntime.CLR;
+
 namespace UGFExtensions.Hotfix
 {
-    public partial class ILRuntimeUtility
+    public static partial class ILRuntimeUtility
     {
-        private static unsafe void RegisterTypeCLRRedirection(AppDomain app)
+        [ILRunTimeRegister(ILRegister.Redirection)]
+        public static unsafe void RegisterTypeCLRRedirection(AppDomain appDomain)
         {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static |
                                 BindingFlags.DeclaredOnly;
@@ -24,10 +22,11 @@ namespace UGFExtensions.Hotfix
             Type type = typeof(System.Type);
             args = new Type[] { };
             method = type.GetMethod("get_IsInterface", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_IsInterface_5);
+            appDomain.RegisterCLRMethodRedirection(method, get_IsInterface_5);
         }
 
-        unsafe static StackObject* get_IsInterface_5(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack,
+        private static unsafe StackObject* get_IsInterface_5(ILIntepreter __intp, StackObject* __esp,
+            IList<object> __mStack,
             CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;

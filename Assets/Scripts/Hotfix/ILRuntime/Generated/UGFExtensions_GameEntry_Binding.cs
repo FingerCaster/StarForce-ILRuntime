@@ -56,17 +56,14 @@ namespace ILRuntime.Runtime.Generated
             method = type.GetMethod("get_Base", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, get_Base_10);
             args = new Type[]{};
-            method = type.GetMethod("get_DataTable", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_DataTable_11);
-            args = new Type[]{};
             method = type.GetMethod("get_Config", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_Config_12);
+            app.RegisterCLRMethodRedirection(method, get_Config_11);
             args = new Type[]{};
             method = type.GetMethod("get_Localization", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_Localization_13);
+            app.RegisterCLRMethodRedirection(method, get_Localization_12);
             args = new Type[]{};
             method = type.GetMethod("get_Setting", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_Setting_14);
+            app.RegisterCLRMethodRedirection(method, get_Setting_13);
 
 
         }
@@ -208,18 +205,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* get_DataTable_11(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
-        {
-            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 0);
-
-
-            var result_of_this_method = UGFExtensions.GameEntry.DataTable;
-
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
-        }
-
-        static StackObject* get_Config_12(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* get_Config_11(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* __ret = ILIntepreter.Minus(__esp, 0);
@@ -230,7 +216,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* get_Localization_13(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* get_Localization_12(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* __ret = ILIntepreter.Minus(__esp, 0);
@@ -241,7 +227,7 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* get_Setting_14(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* get_Setting_13(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* __ret = ILIntepreter.Minus(__esp, 0);

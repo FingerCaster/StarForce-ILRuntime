@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using ILRuntime.CLR.Method;
 using ILRuntime.CLR.TypeSystem;
 using ILRuntime.Runtime.Enviorment;
@@ -9,14 +7,13 @@ using ILRuntime.Runtime.Intepreter;
 using ILRuntime.Runtime.Stack;
 using UnityEngine;
 using UnityGameFramework.Runtime;
-using AppDomain = ILRuntime.Runtime.Enviorment.AppDomain;
-using Object = UnityEngine.Object;
 
 namespace UGFExtensions.Hotfix
 {
-    public partial class ILRuntimeUtility
+    public partial class ILRuntimeUtility 
     {
-        private static unsafe void RegisterComponentCLRRedirection(AppDomain appDomain)
+        [ILRunTimeRegister(ILRegister.Redirection)]
+        public static unsafe void RegisterComponentCLRRedirection(AppDomain appDomain)
         {
             var arr = typeof(Component).GetMethods();
             foreach (var i in arr)
@@ -28,8 +25,8 @@ namespace UGFExtensions.Hotfix
             }
         }
 
-
-        unsafe static StackObject* ComponentGetComponent(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack,
+        private static unsafe StackObject* ComponentGetComponent(ILIntepreter __intp, StackObject* __esp,
+            IList<object> __mStack,
             CLRMethod __method, bool isNewObj)
         {
             //CLR重定向的说明请看相关文档和教程，这里不多做解释
@@ -42,7 +39,8 @@ namespace UGFExtensions.Hotfix
             if (obj is Component component)
             {
                 instance = component.gameObject;
-            }else if (obj is GameObject gameObject)
+            }
+            else if (obj is GameObject gameObject)
             {
                 instance = gameObject;
             }
@@ -53,6 +51,7 @@ namespace UGFExtensions.Hotfix
                     instance = monoBehaviour.gameObject;
                 }
             }
+
             if (instance == null)
                 throw new System.NullReferenceException();
             __intp.Free(ptr);

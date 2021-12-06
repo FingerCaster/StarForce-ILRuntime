@@ -55,12 +55,8 @@ namespace ILRuntime.Runtime.Generated
             UGFExtensions_LoadHotfixDataTableUserData_Binding.Register(app);
             GameFramework_DataTable_DataTableBase_Binding.Register(app);
             UGFExtensions_Await_AwaitableExtension_Binding.Register(app);
-            GameFramework_DataTable_IDataTable_1_DRHotfix_Binding.Register(app);
-            UGFExtensions_DRHotfix_Binding.Register(app);
             UnityGameFramework_Runtime_DataTableComponent_Binding.Register(app);
             UGFExtensions_UIExtension_Binding.Register(app);
-            ILRuntime_Reflection_ILRuntimeType_Binding.Register(app);
-            ILRuntime_CLR_TypeSystem_ILType_Binding.Register(app);
             UnityEngine_LayerMask_Binding.Register(app);
             UnityEngine_Quaternion_Binding.Register(app);
             UnityGameFramework_Runtime_EntityLogic_Binding.Register(app);
@@ -127,8 +123,6 @@ namespace ILRuntime.Runtime.Generated
             UnityEngine_Application_Binding.Register(app);
             UnityGameFramework_Runtime_VarObject_Binding.Register(app);
             GameFramework_Variable_1_Object_Binding.Register(app);
-            UnityGameFramework_Runtime_LoadDataTableSuccessEventArgs_Binding.Register(app);
-            UnityGameFramework_Runtime_LoadDataTableFailureEventArgs_Binding.Register(app);
             System_Collections_Generic_Dictionary_2_Byte_ILTypeInstance_Binding.Register(app);
             GameFramework_Variable_1_Byte_Binding.Register(app);
             UnityGameFramework_Runtime_ConfigComponent_Binding.Register(app);
@@ -174,11 +168,6 @@ namespace ILRuntime.Runtime.Generated
             UnityEngine_Events_UnityEvent_1_Boolean_Binding.Register(app);
             UnityEngine_Events_UnityEvent_1_Single_Binding.Register(app);
             UnityGameFramework_Runtime_SettingComponent_Binding.Register(app);
-            UGFExtensions_DataTableExtension_Binding.Register(app);
-            System_IO_MemoryStream_Binding.Register(app);
-            System_Text_Encoding_Binding.Register(app);
-            System_IO_BinaryReader_Binding.Register(app);
-            BinaryExtension_Binding.Register(app);
             System_Collections_Generic_Dictionary_2_Int32_LinkedList_1_EventHandler_1_ILTypeInstance_Binding.Register(app);
             System_Collections_Generic_LinkedList_1_EventHandler_1_ILTypeInstance_Binding.Register(app);
             System_Collections_Generic_LinkedListNode_1_EventHandler_1_ILTypeInstance_Binding.Register(app);
