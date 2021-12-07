@@ -1,7 +1,7 @@
-﻿using System;
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 #if ILRuntime
 using ILRuntime.CLR.Method;
@@ -12,7 +12,6 @@ using ILRuntime.Runtime.Enviorment;
 using ILRuntime.Runtime.Intepreter;
 using ILRuntime.Runtime.Stack;
 #endif
-
 namespace CatJson
 {
     /// <summary>
@@ -28,14 +27,12 @@ namespace CatJson
         /// <summary>
         /// 类型与其对应的属性信息
         /// </summary>
-        private static Dictionary<Type, Dictionary<RangeString, PropertyInfo>> propertyInfoDict =
-            new Dictionary<Type, Dictionary<RangeString, PropertyInfo>>();
-
+        private static Dictionary<Type, Dictionary<RangeString, PropertyInfo>> propertyInfoDict = new Dictionary<Type, Dictionary<RangeString, PropertyInfo>>();
+        
         /// <summary>
         /// 类型与其对应的字段信息
         /// </summary>
-        private static Dictionary<Type, Dictionary<RangeString, FieldInfo>> fieldInfoDict =
-            new Dictionary<Type, Dictionary<RangeString, FieldInfo>>();
+        private static Dictionary<Type, Dictionary<RangeString, FieldInfo>> fieldInfoDict = new Dictionary<Type, Dictionary<RangeString, FieldInfo>>();
 
         /// <summary>
         /// 扩展类型与其对应的解析方法
@@ -55,9 +52,9 @@ namespace CatJson
         /// <summary>
         /// 解析Json对象的通用流程
         /// </summary>
-        public static void ParseJsonObjectProcedure(object userdata1, object userdata2, bool isIntKey,
-            Action<object, object, bool, RangeString, TokenType> action)
+        public static void ParseJsonObjectProcedure(object userdata1,object userdata2,bool isIntKey,Action<object,object,bool,RangeString, TokenType> action)
         {
+
             //跳过 {
             Lexer.GetNextTokenByType(TokenType.LeftBrace);
 
@@ -73,7 +70,7 @@ namespace CatJson
                 //array和json obj需要完整的[]和{}，所以只能look
                 TokenType nextTokenType = Lexer.LookNextTokenType();
 
-                action(userdata1, userdata2, isIntKey, key, nextTokenType);
+                action(userdata1,userdata2,isIntKey,key, nextTokenType);
 
                 //有逗号就跳过逗号
                 if (Lexer.LookNextTokenType() == TokenType.Comma)
@@ -90,6 +87,7 @@ namespace CatJson
                     //没有逗号就说明结束了
                     break;
                 }
+
             }
 
             //跳过 }
@@ -99,8 +97,7 @@ namespace CatJson
         /// <summary>
         /// 解析Json数组的通用流程
         /// </summary>
-        public static void ParseJsonArrayProcedure(object userdata1, object userdata2,
-            Action<object, object, TokenType> action)
+        public static void ParseJsonArrayProcedure(object userdata1,object userdata2, Action<object,object,TokenType> action)
         {
             //跳过[
             Lexer.GetNextTokenByType(TokenType.LeftBracket);
@@ -111,7 +108,7 @@ namespace CatJson
                 //array和json obj需要完整的[]和{}，所以只能look
                 TokenType nextTokenType = Lexer.LookNextTokenType();
 
-                action(userdata1, userdata2, nextTokenType);
+                action(userdata1,userdata2,nextTokenType);
 
                 //有逗号就跳过
                 if (Lexer.LookNextTokenType() == TokenType.Comma)
@@ -167,9 +164,10 @@ namespace CatJson
                         //属性必须同时具有get set 并且不能是索引器item
                         dict1.Add(new RangeString(pi.Name), pi);
                     }
+                    
                 }
+                
             }
-
             propertyInfoDict.Add(type, dict1);
 
             FieldInfo[] fis = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
@@ -181,7 +179,7 @@ namespace CatJson
                 {
                     FieldInfo fi = fis[i];
 
-                    if (Attribute.IsDefined(fi, typeof(JsonIgnoreAttribute)))
+                    if (Attribute.IsDefined(fi,typeof(JsonIgnoreAttribute)))
                     {
                         //需要忽略
                         continue;
@@ -195,13 +193,13 @@ namespace CatJson
 
                     dict2.Add(new RangeString(fi.Name), fi);
                 }
-            }
 
+            }
             fieldInfoDict.Add(type, dict2);
         }
 
         /// <summary>
-        /// 检查Type,，如果是热更层的需要进行转换
+        /// 检查Type,如果是热更层的需要进行转换
         /// </summary>
         private static Type CheckType(Type type)
         {
@@ -222,9 +220,8 @@ namespace CatJson
 #if ILRuntime
             if (obj is ILTypeInstance ins)
             {
-                return ins.Type.ReflectionType;
+               return ins.Type.ReflectionType;
             }
-
             if (obj is CrossBindingAdaptorType cross)
             {
                 return cross.ILInstance.Type.ReflectionType;
@@ -244,28 +241,7 @@ namespace CatJson
                 return ilrtType.ILType.Instantiate();
             }
 #endif
-            var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public| BindingFlags.NonPublic);
-            ConstructorInfo constructor = Array.Find(constructors, _ =>_.IsPublic && _.GetParameters().Length == 0);
-            object[] objects = null;
-            if (constructor == null)
-            {
-                constructor = constructors.LastOrDefault();
-                if (constructor == null)
-                {
-                    throw new Exception($"MissingMethodException: Constructor on type '{type.FullName}' not found.");
-                }
-
-                var parameters = constructor.GetParameters();
-                objects = new object[parameters.Length];
-                for (int i = 0; i < parameters.Length; i++)
-                {
-                    objects[i] = parameters[i].ParameterType.IsValueType
-                        ? Activator.CreateInstance(parameters[i].ParameterType)
-                        : null;
-                }
-            }
-            return constructor.Invoke(objects);
-            // return Activator.CreateInstance(type);
+            return Activator.CreateInstance(type);
         }
 #if ILRuntime
         public unsafe static void RegisterILRuntimeCLRRedirection(ILRuntime.Runtime.Enviorment.AppDomain appdomain)
@@ -283,8 +259,7 @@ namespace CatJson
             }
         }
 
-        public unsafe static StackObject* RedirectionParseJson(ILIntepreter intp, StackObject* esp,
-            IList<object> mStack, CLRMethod method, bool isNewObj)
+        public unsafe static StackObject* RedirectionParseJson(ILIntepreter intp, StackObject* esp, IList<object> mStack, CLRMethod method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -294,8 +269,7 @@ namespace CatJson
             bool reflection = ptr_of_this_method->Value == 1;
 
             ptr_of_this_method = ILIntepreter.Minus(esp, 2);
-            string json =
-                (string)typeof(string).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, mStack));
+            string json = (string)typeof(string).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, mStack));
 
             intp.Free(ptr_of_this_method);
 
@@ -306,8 +280,7 @@ namespace CatJson
             return ILIntepreter.PushObject(__ret, mStack, result_of_this_method);
         }
 
-        public unsafe static StackObject* RedirectionToJson(ILIntepreter intp, StackObject* esp, IList<object> mStack,
-            CLRMethod method, bool isNewObj)
+        public unsafe static StackObject* RedirectionToJson(ILIntepreter intp, StackObject* esp, IList<object> mStack, CLRMethod method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = intp.AppDomain;
             StackObject* ptr_of_this_method;

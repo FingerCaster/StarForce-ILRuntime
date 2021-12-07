@@ -28,12 +28,11 @@ namespace UGFExtensions.Hotfix
             {
                 if (m_appDomain == null)
                 {
-                    m_appDomain = new AppDomain();
+                    m_appDomain = new AppDomain(ILRuntimeJITFlags.JITOnDemand);
                 }
 
                 return m_appDomain;
             }
-            private set => m_appDomain = value;
         }
 
         private IMethod m_Update;

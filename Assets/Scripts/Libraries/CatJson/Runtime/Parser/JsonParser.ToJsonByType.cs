@@ -33,7 +33,22 @@ namespace CatJson
             if (reflection)
             {
                 //反射转换
-                AppendJsonObject(obj, type, 0);
+
+                if (Util.IsArrayOrList(obj))
+                {
+                    //数组或list
+                    AppendJsonArray(type, obj, 0);
+                }
+                else if (Util.IsDictionary(obj))
+                {
+                    //字典
+                    AppendJsonDict(obj, 0);
+                }
+                else
+                {
+                    //自定义类
+                    AppendJsonObject(obj, type, 0);
+                }
             }
             else
             {
@@ -118,16 +133,6 @@ namespace CatJson
             Util.AppendLine(string.Empty);
             Util.Append("}",depth);
         }
-
-        // /// <summary>
-        // /// 追加单个Json 键值对文本
-        // /// </summary>
-        // private static void AppendJsonKeyValue(Type valueType, string name, object value, int depth)
-        // {
-        //     AppendJsonKey(name, depth);
-        //     AppendJsonValue(valueType, value, depth);
-        //     Util.AppendLine(",");
-        // }
 
         /// <summary>
         /// 追加json key文本
@@ -220,7 +225,7 @@ namespace CatJson
         private static void AppendJsonArray(Type valueType, object value, int depth)
         {
             Util.AppendLine("[");
-
+            
             if (valueType.IsArray)
             {
                 Array array = (Array)value;
@@ -234,13 +239,13 @@ namespace CatJson
                     }
                     else
                     {
-                        AppendJsonValue(GetType(element), element, depth + 1);
+                        AppendJsonValue(GetType(element), element, depth+1);
                     }
-
-                    if (i < array.Length - 1)
+                    if (i< array.Length-1)
                     {
                         Util.AppendLine(",");
                     }
+                 
                 }
             }
             else
@@ -259,13 +264,12 @@ namespace CatJson
                         AppendJsonValue(GetType(element), element, depth + 1);
                     }
 
-                    if (i < list.Count - 1)
+                    if (i< list.Count-1)
                     {
                         Util.AppendLine(",");
                     }
                 }
             }
-
             Util.AppendLine(string.Empty);
             Util.Append("]", depth);
         }
@@ -291,9 +295,9 @@ namespace CatJson
                 }
                 else
                 {
-                    AppendJsonKey(enumerator.Key.ToString(), depth + 1);
-                    AppendJsonValue(GetType(enumerator.Value), enumerator.Value, depth + 1);
-                    if (index < dict.Count - 1)
+                    AppendJsonKey(enumerator.Key.ToString(), depth+1);
+                    AppendJsonValue(GetType(enumerator.Value), enumerator.Value, depth+1);
+                    if (index < dict.Count-1)
                     {
                         Util.AppendLine(",");
                     }
