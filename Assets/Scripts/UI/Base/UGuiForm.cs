@@ -95,6 +95,10 @@ namespace UGFExtensions
             Text[] texts = GetComponentsInChildren<Text>(true);
             for (int i = 0; i < texts.Length; i++)
             {
+                if (string.IsNullOrEmpty(texts[i].text))
+                {
+                    continue;
+                }
                 texts[i].text = GameEntry.Localization.GetString(texts[i].text);
             }
             
