@@ -28,12 +28,12 @@ namespace UGFExtensions.Hotfix
                 {
                     if (i.Name == "ToObject" && i.IsGenericMethodDefinition)
                     {
-                        appDomain.RegisterCLRMethodRedirection(i, CatJsonExtensions.RedirectionParseJson);
+                        appDomain.RegisterCLRMethodRedirection(i, CatJson.JsonParser.RedirectionParseJson);
                     }
 
-                    if (i.Name == "ToJson")
+                    if (i.Name == "ToJson" && i.IsGenericMethodDefinition)
                     {
-                        appDomain.RegisterCLRMethodRedirection(i, CatJsonExtensions.RedirectionToJson);
+                        appDomain.RegisterCLRMethodRedirection(i, CatJson.JsonParser.RedirectionToJson);
                     }
                 }
             }
