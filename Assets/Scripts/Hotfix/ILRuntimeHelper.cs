@@ -184,8 +184,12 @@ namespace UGFExtensions.Hotfix
             {
                 return;
             }
-
-            AppDomain.Invoke(m_ApplicationPause, m_HotfixGameEntry, pauseStatus);
+            using (var ctx = AppDomain.BeginInvoke(m_ApplicationPause))
+            {
+                ctx.PushObject(m_HotfixGameEntry);
+                ctx.PushBool(pauseStatus);
+                ctx.Invoke();
+            }
         }
 
         private void OnApplicationQuit()

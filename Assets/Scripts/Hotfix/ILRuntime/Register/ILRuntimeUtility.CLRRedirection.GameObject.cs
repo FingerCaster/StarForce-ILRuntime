@@ -96,8 +96,8 @@ namespace UGFExtensions.Hotfix
                     else
                     {
                         //热更DLL内的类型比较麻烦。首先我们得自己手动创建实例
-                        var ilInstance =
-                            new ILTypeInstance(type as ILType, false); //手动创建实例是因为默认方式会new MonoBehaviour，这在Unity里不允许
+                        ILType ilType = type as ILType;
+                        var ilInstance = new ILTypeInstance(ilType, false); //手动创建实例是因为默认方式会new MonoBehaviour，这在Unity里不允许
                         //接下来创建Adapter实例
                         var clrInstance = instance.AddComponent<MonoBehaviourAdapter.Adaptor>();
                         //unity创建的实例并没有热更DLL里面的实例，所以需要手动赋值
@@ -107,7 +107,9 @@ namespace UGFExtensions.Hotfix
                         ilInstance.CLRInstance = clrInstance;
 
                         res = clrInstance.ILInstance; //交给ILRuntime的实例应该为ILInstance
-
+                        // 需要手动调用一下构造函数 否则MonoBehaviour 字段初始化 只会是默认值
+                        var constructor = ilType.GetConstructor(0);
+                        __domain.Invoke(constructor, ilInstance);
                         clrInstance.Awake(); //因为Unity调用这个方法时还没准备好所以这里补调一次
                     }
                 }
@@ -161,7 +163,8 @@ namespace UGFExtensions.Hotfix
                     ilInstance.CLRInstance = clrInstance;
 
                     res = clrInstance.ILInstance; //交给ILRuntime的实例应该为ILInstance
-
+                    var constructor = ilType.GetConstructor(0);
+                    __domain.Invoke(constructor, ilInstance);
                     var awake = clrInstance.GetType().GetMethod("Awake", BindingFlags.Public | BindingFlags.Instance);
                     awake?.Invoke(clrInstance, null); //因为Unity调用这个方法时还没准备好所以这里补调一次
                 }

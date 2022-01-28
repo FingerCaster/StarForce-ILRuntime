@@ -11,12 +11,11 @@ namespace UGFExtensions.Hotfix
     public class MonoHelper : HotfixHelperBase
     {
         private Assembly m_Assembly;
-        private MethodInfo m_Update;
+        private Action<float,float> m_Update;
         private MethodInfo m_Shutdown;
-        private MethodInfo m_ApplicationPause;
+        private Action<bool> m_ApplicationPause;
         private MethodInfo m_ApplicationQuit;
         private List<Type> m_HotfixTypes;
-        private object[] m_UpdateParams;
         private object m_HotfixGameEntry;
         public override object GetHotfixGameEntry => m_HotfixGameEntry;
 
@@ -49,7 +48,6 @@ namespace UGFExtensions.Hotfix
             Log.Info("hotfix pdb加载完毕");
             m_Assembly = Assembly.Load(dll, pdb);
             m_HotfixTypes = m_Assembly.GetTypes().ToList();
-            m_UpdateParams = new object[2];
             Enter();
         }
 
@@ -58,10 +56,14 @@ namespace UGFExtensions.Hotfix
             string typeFullName = "UGFExtensions.Hotfix.HotfixGameEntry";
             Type hotfixInit = m_Assembly.GetType(typeFullName);
             m_HotfixGameEntry = Activator.CreateInstance(hotfixInit);
-            MethodInfo start = hotfixInit.GetMethod("Start",BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            m_Update = hotfixInit.GetMethod("Update",BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var start = hotfixInit.GetMethod("Start",BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var update = hotfixInit.GetMethod("Update",BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (update != null)
+                m_Update = (Action<float, float>)Delegate.CreateDelegate(typeof(Action<float, float>), m_HotfixGameEntry, update);
             m_Shutdown = hotfixInit.GetMethod("Shutdown",BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            m_ApplicationPause = hotfixInit.GetMethod("OnApplicationPause",BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var applicationPause = hotfixInit.GetMethod("OnApplicationPause",BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (applicationPause != null)
+                m_ApplicationPause = (Action<bool>)Delegate.CreateDelegate(typeof(Action<bool>), m_HotfixGameEntry, applicationPause);
             m_ApplicationQuit = hotfixInit.GetMethod("OnApplicationQuit",BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             start?.Invoke(m_HotfixGameEntry, null);
         }
@@ -100,14 +102,7 @@ namespace UGFExtensions.Hotfix
 
         private void Update()
         {
-            if (m_Update == null)
-            {
-                return;
-            }
-
-            m_UpdateParams[0] = Time.deltaTime;
-            m_UpdateParams[1] = Time.unscaledDeltaTime;
-            m_Update.Invoke(m_HotfixGameEntry, m_UpdateParams);
+            m_Update?.Invoke(Time.deltaTime, Time.unscaledDeltaTime);
         }
 
         private void OnApplicationPause(bool pauseStatus)
@@ -117,7 +112,7 @@ namespace UGFExtensions.Hotfix
                 return;
             }
 
-            m_ApplicationPause.Invoke(m_HotfixGameEntry, new object[] { pauseStatus });
+            m_ApplicationPause.Invoke(pauseStatus);
         }
 
         private void OnApplicationQuit()
