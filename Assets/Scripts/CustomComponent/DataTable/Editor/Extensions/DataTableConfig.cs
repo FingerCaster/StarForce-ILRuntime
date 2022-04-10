@@ -13,7 +13,7 @@ namespace DE.Editor
         /// <summary>
         /// 数据表存放文件夹路径
         /// </summary>
-        public const string DataTableFolderPath = "Assets/Res/DataTables";
+        public const string DataTableFolderPath = "Assets/Res/DataTables/NotHotfix";
 
         public static readonly string ExcelsFolder = $"{Application.dataPath}/../Excels/";
 

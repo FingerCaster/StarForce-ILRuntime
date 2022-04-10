@@ -83,14 +83,10 @@ namespace DE.Editor.DataTableTools
 
             var csharpCodeFileName = Utility.Path.GetRegularPath(Path.Combine(HotfixDataTableConfig.HotfixProjectFolder,
                 HotfixDataTableConfig.HotfixDataTableFolder, "DR" + dataTableName + ".cs"));
-            HotfixProjectUtility.AddCompileItem(Utility.Path.GetRegularPath(Path.Combine(
-                HotfixDataTableConfig.HotfixDataTableFolder, "DR" + dataTableName + ".cs")));
             if (!dataTableProcessor.GenerateCodeFile(csharpCodeFileName, Encoding.UTF8, dataTableName) &&
                 File.Exists(csharpCodeFileName))
             {
                 File.Delete(csharpCodeFileName);
-                HotfixProjectUtility.RemoveCompileItem(Utility.Path.GetRegularPath(Path.Combine(
-                    HotfixDataTableConfig.HotfixDataTableFolder, "DR" + dataTableName + ".cs")));
             }
 
         }

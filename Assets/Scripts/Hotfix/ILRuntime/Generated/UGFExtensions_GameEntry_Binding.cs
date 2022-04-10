@@ -50,8 +50,8 @@ namespace ILRuntime.Runtime.Generated
             method = type.GetMethod("get_Scene", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, get_Scene_8);
             args = new Type[]{};
-            method = type.GetMethod("get_Timer", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_Timer_9);
+            method = type.GetMethod("get_TimingWheel", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, get_TimingWheel_9);
             args = new Type[]{};
             method = type.GetMethod("get_Base", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, get_Base_10);
@@ -178,13 +178,13 @@ namespace ILRuntime.Runtime.Generated
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
-        static StackObject* get_Timer_9(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* get_TimingWheel_9(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* __ret = ILIntepreter.Minus(__esp, 0);
 
 
-            var result_of_this_method = UGFExtensions.GameEntry.Timer;
+            var result_of_this_method = UGFExtensions.GameEntry.TimingWheel;
 
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)

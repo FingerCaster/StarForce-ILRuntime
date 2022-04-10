@@ -1,7 +1,6 @@
 ﻿using UGFExtensions.Hotfix;
 using UGFExtensions.SpriteCollection;
 using UGFExtensions.Texture;
-using UGFExtensions.Timer;
 
 namespace UGFExtensions
 {
@@ -13,7 +12,7 @@ namespace UGFExtensions
         /// <summary>
         /// 获取定时器组件。
         /// </summary>
-        public static TimerComponent Timer
+        public static TimingWheelComponent TimingWheel
         {
             get;
             private set;
@@ -50,7 +49,7 @@ namespace UGFExtensions
         public static HotfixComponent Hotfix { get; private set; }
         private static void InitCustomComponents()
         {
-            Timer = UnityGameFramework.Runtime.GameEntry.GetComponent<TimerComponent>();
+            TimingWheel = UnityGameFramework.Runtime.GameEntry.GetComponent<TimingWheelComponent>();
             BuiltinData = UnityGameFramework.Runtime.GameEntry.GetComponent<BuiltinDataComponent>();
             SpriteCollection = UnityGameFramework.Runtime.GameEntry.GetComponent<SpriteCollectionComponent>();
             TextureSet = UnityGameFramework.Runtime.GameEntry.GetComponent<TextureSetComponent>();

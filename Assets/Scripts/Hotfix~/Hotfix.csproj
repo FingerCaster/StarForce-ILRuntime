@@ -7,11 +7,14 @@
     <ProjectGuid>{424045A3-8084-45B4-9B20-9C50A6B993FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Hotfix</RootNamespace>
     <AssemblyName>Hotfix</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <LangVersion>9</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,154 +34,556 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="**\*.cs" />
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\Library\ScriptAssemblies\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\Temp\Bin\Debug\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="GameFramework, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\GameFramework\Libraries\GameFramework.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\Temp\Bin\Debug\GameFramework.dll</HintPath>
     </Reference>
-    <Reference Include="ILRunTime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\Library\ScriptAssemblies\ILRunTime.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
+      <HintPath>..\..\..\Temp\Bin\Debug\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="System">
+    <Reference Include="netstandard, Version=2.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\..\..\netstandard.dll</HintPath>
     </Reference>
-    <Reference Include="System.Core">
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq">
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.AIModule.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
+    <Reference Include="UnityEngine.ARModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.ARModule.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CSharp">
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.AccessibilityModule.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data">
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.AndroidJNIModule.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http">
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.AnimationModule.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml">
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.AssetBundleModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>Tools\UnityDll\UnityEngine.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.AudioModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>Tools\UnityDll\UnityEngine.AnimationModule.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="UnityEngine.ClothModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.ClothModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>Tools\UnityDll\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="UnityEngine.ClusterInputModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.ClusterInputModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>Tools\UnityDll\UnityEngine.PhysicsModule.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.ClusterRendererModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.CrashReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DSPGraphModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.DSPGraphModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.DirectorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.GameCenterModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.GridModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.HotReloadModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.LocalizationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.PerformanceReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ProfilerModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.ProfilerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.ScreenCaptureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.SharedInternalsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.SpriteMaskModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.SpriteShapeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.StreamingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.SubstanceModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubsystemsModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.SubsystemsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreFontEngineModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Temp\Bin\Debug\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreTextEngineModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Temp\Bin\Debug\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>Tools\UnityDll\UnityEngine.TextRenderingModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\Temp\Bin\Debug\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>Tools\UnityDll\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="UnityEngine.TLSModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.TLSModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>Tools\UnityDll\UnityEngine.UIModule.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="UnityEngine.TerrainModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.TerrainModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TilemapModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.TilemapModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UIElementsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UNETModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UNETModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UmbraModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UmbraModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityTestProtocolModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VFXModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.VFXModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.VRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.VehiclesModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.VideoModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.WindModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.XRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\..\Temp\bin\Debug\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>..\..\..\Temp\bin\Debug\mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>..\..\..\Temp\bin\Debug\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Xml.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <HintPath>..\..\..\Temp\bin\Debug\Microsoft.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives">
+      <HintPath>..\..\..\Temp\bin\Debug\Microsoft.Win32.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.AppContext">
+      <HintPath>..\..\..\Temp\bin\Debug\System.AppContext.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Concurrent">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Collections.Concurrent.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.NonGeneric">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Collections.NonGeneric.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Specialized">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Collections.Specialized.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations">
+      <HintPath>..\..\..\Temp\bin\Debug\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel">
+      <HintPath>..\..\..\Temp\bin\Debug\System.ComponentModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.EventBasedAsync">
+      <HintPath>..\..\..\Temp\bin\Debug\System.ComponentModel.EventBasedAsync.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Primitives">
+      <HintPath>..\..\..\Temp\bin\Debug\System.ComponentModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.TypeConverter">
+      <HintPath>..\..\..\Temp\bin\Debug\System.ComponentModel.TypeConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Console">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Common">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Contracts">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Diagnostics.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Debug">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Diagnostics.Debug.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.FileVersionInfo">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Diagnostics.FileVersionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Process">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Diagnostics.Process.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.StackTrace">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Diagnostics.StackTrace.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.TextWriterTraceListener">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Diagnostics.TextWriterTraceListener.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tools">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Diagnostics.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.TraceSource">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Diagnostics.TraceSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Primitives">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Drawing.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Dynamic.Runtime">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Dynamic.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Globalization.Calendars.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Globalization">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Globalization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Globalization.Extensions">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Globalization.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression.ZipFile">
+      <HintPath>..\..\..\Temp\bin\Debug\System.IO.Compression.ZipFile.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO">
+      <HintPath>..\..\..\Temp\bin\Debug\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem">
+      <HintPath>..\..\..\Temp\bin\Debug\System.IO.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.DriveInfo">
+      <HintPath>..\..\..\Temp\bin\Debug\System.IO.FileSystem.DriveInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives">
+      <HintPath>..\..\..\Temp\bin\Debug\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Watcher">
+      <HintPath>..\..\..\Temp\bin\Debug\System.IO.FileSystem.Watcher.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.IsolatedStorage">
+      <HintPath>..\..\..\Temp\bin\Debug\System.IO.IsolatedStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.MemoryMappedFiles">
+      <HintPath>..\..\..\Temp\bin\Debug\System.IO.MemoryMappedFiles.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Pipes">
+      <HintPath>..\..\..\Temp\bin\Debug\System.IO.Pipes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.UnmanagedMemoryStream">
+      <HintPath>..\..\..\Temp\bin\Debug\System.IO.UnmanagedMemoryStream.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Expressions">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Linq.Expressions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Parallel">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Linq.Parallel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Queryable">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Linq.Queryable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Rtc">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Net.Http.Rtc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.NameResolution">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Net.NameResolution.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.NetworkInformation">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Net.NetworkInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Ping">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Net.Ping.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Primitives">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Net.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Requests">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Net.Requests.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Security">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Net.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Sockets">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Net.Sockets.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.WebHeaderCollection">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Net.WebHeaderCollection.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.WebSockets.Client">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Net.WebSockets.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.WebSockets">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Net.WebSockets.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ObjectModel">
+      <HintPath>..\..\..\Temp\bin\Debug\System.ObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Emit">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Reflection.Emit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.ILGeneration">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Reflection.Emit.ILGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.Lightweight">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Reflection.Emit.Lightweight.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Extensions">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Reflection.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Primitives">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Reflection.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Resources.Reader">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Resources.Reader.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Resources.ResourceManager">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Resources.ResourceManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Resources.Writer">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Resources.Writer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.VisualC">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.CompilerServices.VisualC.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Handles">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.Handles.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.InteropServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.WindowsRuntime">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.InteropServices.WindowsRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Numerics">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.Serialization.Formatters.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Json">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.Serialization.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Primitives">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.Serialization.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Xml">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Runtime.Serialization.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Claims">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Security.Claims.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Csp">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Security.Cryptography.Csp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Security.Principal.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.SecureString">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Security.SecureString.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Duplex">
+      <HintPath>..\..\..\Temp\bin\Debug\System.ServiceModel.Duplex.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Http">
+      <HintPath>..\..\..\Temp\bin\Debug\System.ServiceModel.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.NetTcp">
+      <HintPath>..\..\..\Temp\bin\Debug\System.ServiceModel.NetTcp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Primitives">
+      <HintPath>..\..\..\Temp\bin\Debug\System.ServiceModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Security">
+      <HintPath>..\..\..\Temp\bin\Debug\System.ServiceModel.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Text.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.Extensions">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Text.Encoding.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.RegularExpressions">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Text.RegularExpressions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Overlapped">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Threading.Overlapped.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Parallel">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Threading.Tasks.Parallel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Thread">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Threading.Thread.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.ThreadPool">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Threading.ThreadPool.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Timer">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Threading.Timer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple">
+      <HintPath>..\..\..\Temp\bin\Debug\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.ReaderWriter">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Xml.ReaderWriter.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XDocument">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Xml.XDocument.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XmlDocument">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Xml.XmlDocument.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XmlSerializer">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Xml.XmlSerializer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XPath">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Xml.XPath.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XPath.XDocument">
+      <HintPath>..\..\..\Temp\bin\Debug\System.Xml.XPath.XDocument.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\Temp\bin\Debug\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityGameFramework.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\Library\ScriptAssemblies\UnityGameFramework.Runtime.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\Temp\Bin\Debug\UnityGameFramework.Runtime.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Custom\CustomComponent\HotfixGameEntry.Custum.cs" />
-    <Compile Include="Custom\CustomExtensions\HotfixDataTableExtensions.cs" />
-    <Compile Include="Custom\CustomExtensions\HotfixUIExtensions.cs" />
-    <Compile Include="Custom\CustomExtensions\UnityExtensions.cs" />
-    <Compile Include="DataTable\Base\HotfixDataRowBase.cs" />
-    <Compile Include="Definition\Constant\Constant.AssetPriority.cs" />
-    <Compile Include="Definition\Constant\Constant.Config.cs" />
-    <Compile Include="Definition\Constant\Constant.Layer.cs" />
-    <Compile Include="Definition\Constant\Constant.ProcedureData.cs" />
-    <Compile Include="Definition\Constant\Constant.Setting.cs" />
-    <Compile Include="Definition\Enum\CampType.cs" />
-    <Compile Include="Definition\Enum\HotfixEntityId.cs" />
-    <Compile Include="Definition\Enum\HotfixEventId.cs" />
-    <Compile Include="Definition\Enum\HotfixSceneId.cs" />
-    <Compile Include="Definition\Enum\HotfixUIFormId.cs" />
-    <Compile Include="Definition\Enum\HotfixUISoundId.cs" />
-    <Compile Include="Definition\Enum\RelationType.cs" />
-    <Compile Include="Definition\Struct\ImpactData.cs" />
-    <Compile Include="Entity\Base\EntityData.cs" />
-    <Compile Include="Entity\Base\EntityLogic.cs" />
-    <Compile Include="Entity\Custom\EntityData\AccessoryObjectData.cs" />
-    <Compile Include="Entity\Custom\EntityData\AircraftData.cs" />
-    <Compile Include="Entity\Custom\EntityData\ArmorData.cs" />
-    <Compile Include="Entity\Custom\EntityData\AsteroidData.cs" />
-    <Compile Include="Entity\Custom\EntityData\BulletData.cs" />
-    <Compile Include="Entity\Custom\EntityData\EffectData.cs" />
-    <Compile Include="Entity\Custom\EntityData\MyAircraftData.cs" />
-    <Compile Include="Entity\Custom\EntityData\TargetableObjectData.cs" />
-    <Compile Include="Entity\Custom\EntityData\ThrusterData.cs" />
-    <Compile Include="Entity\Custom\EntityData\WeaponData.cs" />
-    <Compile Include="Entity\Custom\EntityExtension.cs" />
-    <Compile Include="Entity\Custom\EntityLogic\Aircraft.cs" />
-    <Compile Include="Entity\Custom\EntityLogic\Armor.cs" />
-    <Compile Include="Entity\Custom\EntityLogic\Asteroid.cs" />
-    <Compile Include="Entity\Custom\EntityLogic\Bullet.cs" />
-    <Compile Include="Entity\Custom\EntityLogic\Effect.cs" />
-    <Compile Include="Entity\Custom\EntityLogic\MyAircraft.cs" />
-    <Compile Include="Entity\Custom\EntityLogic\TargetableObject.cs" />
-    <Compile Include="Entity\Custom\EntityLogic\Thruster.cs" />
-    <Compile Include="Entity\Custom\EntityLogic\Weapon.cs" />
-    <Compile Include="EventArgs\Base\HotfixGameEventArgs.cs" />
-    <Compile Include="Event\EventExtensions.cs" />
-    <Compile Include="Event\EventManager.cs" />
-    <Compile Include="Event\EventPool.cs" />
-    <Compile Include="Event\EventPool.Event.cs" />
-    <Compile Include="Event\EventPoolMode.cs" />
-    <Compile Include="Fsm\Base\Fsm.cs" />
-    <Compile Include="Fsm\Base\FsmBase.cs" />
-    <Compile Include="Fsm\Base\FsmEventHandler.cs" />
-    <Compile Include="Fsm\Base\FsmManager.cs" />
-    <Compile Include="Fsm\Base\FsmState.cs" />
-    <Compile Include="Fsm\Base\IFsm.cs" />
-    <Compile Include="Fsm\Base\TextUtility.cs" />
-    <Compile Include="Game\GameBase.cs" />
-    <Compile Include="Game\GameMode.cs" />
-    <Compile Include="Game\SurvivalGame.cs" />
-    <Compile Include="HotfixGameEntry.cs" />
-    <Compile Include="HPBar\HPBarComponent.cs" />
-    <Compile Include="HPBar\HPBarItem.cs" />
-    <Compile Include="HPBar\HPBarItemObject.cs" />
-    <Compile Include="Procedure\Base\ProcedureBase.cs" />
-    <Compile Include="Procedure\Base\ProcedureManager.cs" />
-    <Compile Include="Procedure\Custom\ProcedureChangeScene.cs" />
-    <Compile Include="Procedure\Custom\ProcedureEntry.cs" />
-    <Compile Include="Procedure\Custom\ProcedureLoadHotfixDataTable.cs" />
-    <Compile Include="Procedure\Custom\ProcedureMain.cs" />
-    <Compile Include="Procedure\Custom\ProcedureMenu.cs" />
-    <Compile Include="Procedure\Custom\ProcedurePreload.cs" />
-    <Compile Include="Procedure\Custom\ProcedureWaitForDebug.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReferencePool\IReference.cs" />
-    <Compile Include="ReferencePool\ReferencePool.cs" />
-    <Compile Include="ReferencePool\ReferencePool.ReferenceCollection.cs" />
-    <Compile Include="ReferencePool\ReferencePoolInfo.cs" />
-    <Compile Include="Scene\HideByBoundary.cs" />
-    <Compile Include="Scene\ScrollableBackground.cs" />
-    <Compile Include="UI\Custom\TestForm.cs" />
-    <Compile Include="Utility\AIUtility.cs" />
-    <Compile Include="Utility\HotfixAssetUtility.cs" />
-    <Compile Include="Utility\PermutationAndCombinationUtility.cs" />
-    <Compile Include="UI\Custom\AboutForm.cs" />
-    <Compile Include="UI\Custom\BindComponents\AboutForm.BindComponents.cs" />
-    <Compile Include="UI\Custom\MenuForm.cs" />
-    <Compile Include="UI\Custom\BindComponents\MenuForm.BindComponents.cs" />
-    <Compile Include="UI\Custom\SettingForm.cs" />
-    <Compile Include="UI\Custom\BindComponents\SettingForm.BindComponents.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

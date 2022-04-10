@@ -8,22 +8,21 @@ namespace CatJson.Editor
 {
     public static class JsonCodeGenConfig
     {
-        public static string ParseJsonCodeDirPath = Application.dataPath + "/Scripts/CatJson/Runtime/GenParseJsonCode";
-        public static string ParseClassCodeTemplateFilePath = Application.dataPath + "/Scripts/Libraries/CatJson/Editor/ParseClassCodeTemplate.txt";
-        public static string ParseStructCodeTemplateFilePath = Application.dataPath + "/Scripts/Libraries/CatJson/Editor/ParseStructCodeTemplate.txt";
+        public static string ParseJsonCodeDirPath = Application.dataPath + "/Scripts/GenParseJsonCode";
+        public static string ParseClassCodeTemplateFilePath = Application.dataPath + "/CatJson/Editor/ParseClassCodeTemplate.txt";
+        public static string ParseStructCodeTemplateFilePath = Application.dataPath + "/CatJson/Editor/ParseStructCodeTemplate.txt";
 
-        public static string ToJsonCodeDirPath = Application.dataPath + "/Scripts/Libraries/CatJson/Runtime/GenToJsonCode";
-        public static string ToJsonCodeTemplateFilePaht = Application.dataPath + "/Scripts/Libraries/CatJson/Editor/ToJsonCodeTemplate.txt";
+        public static string ToJsonCodeDirPath = Application.dataPath + "/Scripts/GenToJsonCode";
+        public static string ToJsonCodeTemplateFilePaht = Application.dataPath + "/CatJson/Editor/ToJsonCodeTemplate.txt";
 
-        public static string StaticInitTemplateFilePath = Application.dataPath + "/Scripts/Libraries/CatJson/Editor/StaticInitTemplate.txt";
+        public static string StaticInitTemplateFilePath = Application.dataPath + "/CatJson/Editor/StaticInitTemplate.txt";
 
         /// <summary>
         /// 需要生成解析/转换代码的json数据类的程序集名字
         /// </summary>
         public static string[] Assemblies =
         {
-            "Hotfix",
-            "Assembly-CSharp"
+            "GameMain",
         };
 
         /// <summary>

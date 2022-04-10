@@ -1,11 +1,10 @@
-﻿
-
-using System;
-using System.Collections;
-using System.Threading.Tasks;
+﻿using System;
+using ET;
+using TimingWheel.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
+using Random = UnityEngine.Random;
 
 namespace UGFExtensions.Hotfix
 {
@@ -22,7 +21,7 @@ namespace UGFExtensions.Hotfix
         private CanvasGroup m_CachedCanvasGroup = null;
         private EntityLogic m_Owner = null;
         private int m_OwnerId = 0;
-        private CancellationToken m_CancellationToken;
+        private ETCancellationToken m_CancellationToken;
 
         public EntityLogic Owner
         {
@@ -59,7 +58,7 @@ namespace UGFExtensions.Hotfix
         }
 
         public void Init(EntityLogic owner, Canvas parentCanvas, float fromHPRatio, float toHPRatio,
-            CancellationToken token)
+            ETCancellationToken token)
         {
             if (owner == null)
             {
@@ -96,8 +95,8 @@ namespace UGFExtensions.Hotfix
 
                 Vector2 position;
                 if (RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)m_ParentCanvas.transform,
-                    screenPosition,
-                    m_ParentCanvas.worldCamera, out position))
+                        screenPosition,
+                        m_ParentCanvas.worldCamera, out position))
                 {
                     m_CachedTransform.localPosition = position;
                 }
@@ -108,10 +107,9 @@ namespace UGFExtensions.Hotfix
 
         public void Reset()
         {
-            //StopAllCoroutines();
             m_CancellationToken?.Cancel();
             m_CancellationToken = null;
-            m_CachedCanvasGroup.alpha = 1f;
+            m_CachedCanvasGroup.alpha = 1;
             m_HPBar.value = 1f;
             m_Owner = null;
             CacheGameObject.SetActive(false);
@@ -123,8 +121,8 @@ namespace UGFExtensions.Hotfix
             bool result = await SmoothValue(value, animationDuration);
             if (result)
             {
-                result = await GameEntry.Timer.OnceTimerAsync((long)Math.Ceiling(keepDuration * 1000d),
-                    cancellationToken: m_CancellationToken);
+                result = await GameEntry.TimingWheel.AddTaskAsync(
+                    TimeSpan.FromMilliseconds((long)Math.Ceiling(keepDuration * 1000d)), m_CancellationToken);
             }
 
             if (result)
@@ -133,31 +131,40 @@ namespace UGFExtensions.Hotfix
             }
         }
 
-        async Task<bool> SmoothValue(float value, float duration)
+        ETTask<bool> SmoothValue(float value, float duration)
         {
+            ETTask<bool> etTask = ETTask<bool>.Create(true);
             float originalValue = m_HPBar.value;
             var time = (long)Math.Ceiling(duration * 1000d);
-            bool result = await GameEntry.Timer.OnceTimerAsync((long)Math.Ceiling(duration * 1000d),
-                l => { m_HPBar.value = Mathf.Lerp(originalValue, value, 1f - ((float)l / time)); },
-                m_CancellationToken);
-            if (result)
+            int r = Random.Range(100, 10000);
+            GameEntry.TimingWheel.AddLoopTask((startTime, task) =>
             {
-                m_HPBar.value = value;
-            }
-            return result;
+                long durationTime = DateTimeHelper.GetTimestamp() - startTime;
+                m_HPBar.value = Mathf.Lerp(originalValue, value, (float)(durationTime) / time);
+                if ((time - durationTime) <= 0)
+                {
+                    m_HPBar.value = value;
+                    task.Stop();
+                    etTask.SetResult(true);
+                }
+            }, LoopType.Frame, 1,m_CancellationToken);
+            return etTask;
         }
 
-        async void FadeToAlpha(float value, float duration)
+        void FadeToAlpha(float value, float duration)
         {
             float originalValue = m_CachedCanvasGroup.alpha;
             var time = (long)Math.Ceiling(duration * 1000d);
-            bool result = await GameEntry.Timer.OnceTimerAsync((long)Math.Ceiling(duration * 1000d),
-                l => { m_CachedCanvasGroup.alpha = Mathf.Lerp(originalValue, value, 1f - ((float)l / time)); },
-                m_CancellationToken);
-            if (result)
+            GameEntry.TimingWheel.AddLoopTask((startTime, task) =>
             {
-                m_CachedCanvasGroup.alpha = value;
-            }
+                long durationTime = DateTimeHelper.GetTimestamp() - startTime;
+                m_CachedCanvasGroup.alpha = Mathf.Lerp(originalValue, value, (float)durationTime / time);
+                if ((time - durationTime) <= 0)
+                {
+                    m_CachedCanvasGroup.alpha = value;
+                    task.Stop();
+                }
+            }, LoopType.Frame, 1,m_CancellationToken);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace UGFExtensions.Helper
     {
         public string ToJson(object obj)
         {
-           return JsonParser.ToJson(obj,obj.GetType());
+           return JsonParser.ToJson(obj);
         }
 
         public T ToObject<T>(string json)

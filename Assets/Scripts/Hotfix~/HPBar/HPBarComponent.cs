@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
+using ET;
 using GameFramework.ObjectPool;
 using UGFExtensions.Await;
 using UnityEngine;
@@ -73,7 +75,7 @@ namespace UGFExtensions.Hotfix
                 m_ActiveHPBarItems.Add(hpBarItem);
             }
 
-            hpBarItem.Init(entity, m_CachedCanvas, fromHPRatio, toHPRatio,new CancellationToken());
+            hpBarItem.Init(entity, m_CachedCanvas, fromHPRatio, toHPRatio,new ETCancellationToken());
         }
 
         private void HideHPBar(HPBarItem hpBarItem)

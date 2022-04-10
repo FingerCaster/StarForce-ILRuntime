@@ -178,6 +178,8 @@ namespace UnityGameFramework.Runtime
 
                     //这个实例默认创建的CLRInstance不是通过AddComponent出来的有效实例，所以得手动替换
                     ilInstance.CLRInstance = clrInstance;
+                    var constructor = type.GetConstructor(0);
+                    ilRuntimeType.ILType.AppDomain.Invoke(constructor, ilInstance);
                     m_EntityLogic = clrInstance;
                 }
                 else

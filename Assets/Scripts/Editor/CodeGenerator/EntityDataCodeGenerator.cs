@@ -69,12 +69,6 @@ namespace UGFExtensions.Editor
                 sw.WriteLine("\t}");
                 sw.WriteLine("}");
             }
-
-            if (IsHotfix)
-            {
-                UpdateHotfixCompile();
-            }
-
             return true;
         }
     }

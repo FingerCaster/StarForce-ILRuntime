@@ -17,26 +17,11 @@ namespace UGFExtensions
                 return dataTableBase.GetDataRow(id);
             }
 
-            if (config.FileStream != null)
-            {
-                AddHotfixDataRow(dataTableBase,dataTableName, config.FileStream, value.StartIndex, value.Length);
-            }
-            else
-            {
-                using (IFileStream fileStream = FileStreamHelper.CreateFileStream(config.Path))
-                {
-                    AddHotfixDataRow(dataTableBase,dataTableName, fileStream, value.StartIndex, value.Length);
-                }
-            }
-
+            config.DataProvider.ReadFileSegment(value.StartIndex, ref m_Buffer, 0, value.Length);
+            var realLength = config.DataProvider.ReadFileSegment(value.StartIndex, ref m_Buffer, 0,
+                value.Length);
+            dataTableBase.AddDataRow(m_Buffer, 0, (int)realLength, new LoadHotfixDataTableUserData(dataTableName,null));
             return dataTableBase.GetDataRow(id);
-        }
-        private void AddHotfixDataRow(IDataTable<DRHotfix> dataTable,string dataTableName, IFileStream fileStream, int startIndex, int length)
-        {
-            fileStream.Seek(startIndex, SeekOrigin.Begin);
-            EnsureBufferSize(length);
-            long readLength = fileStream.Read(m_Buffer, 0, length);
-            dataTable.AddDataRow(m_Buffer, 0, (int)readLength, new LoadHotfixDataTableUserData(dataTableName,null));
         }
     }
 }

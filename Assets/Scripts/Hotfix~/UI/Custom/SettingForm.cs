@@ -16,26 +16,25 @@ namespace UGFExtensions.Hotfix
 		{
 			base.OnInit(userdata);
 
-			ComponentAutoBindTool autoBindTool = gameObject.GetComponent<ComponentAutoBindTool>();
-			GetBindComponents(autoBindTool);
-            m_Tog_MusicMute.onValueChanged.AddListener(OnMusicMuteChanged);
+			GetBindComponents(gameObject);
+            m_Toggle_MusicMute.onValueChanged.AddListener(OnMusicMuteChanged);
             m_Slider_MusicVolume.onValueChanged.AddListener(OnMusicVolumeChanged);
             
-            m_Tog_SoundMute.onValueChanged.AddListener(OnSoundMuteChanged);
+            m_Toggle_SoundMute.onValueChanged.AddListener(OnSoundMuteChanged);
             m_Slider_SoundVolume.onValueChanged.AddListener(OnMusicVolumeChanged);
             
-            m_Tog_UISoundMute.onValueChanged.AddListener(OnUISoundMuteChanged);
+            m_Toggle_UISoundMute.onValueChanged.AddListener(OnUISoundMuteChanged);
             m_Slider_UISoundVolume.onValueChanged.AddListener(OnUISoundVolumeChanged);
             
-            m_Tog_English.onValueChanged.AddListener(OnEnglishSelected);
-            m_Tog_ChineseSimplified.onValueChanged.AddListener(OnChineseSimplifiedSelected);
-            m_Tog_ChineseTraditional.onValueChanged.AddListener(OnChineseTraditionalSelected);
-            m_Tog_Korean.onValueChanged.AddListener(OnKoreanSelected);
+            m_Toggle_English.onValueChanged.AddListener(OnEnglishSelected);
+            m_Toggle_ChineseSimplified.onValueChanged.AddListener(OnChineseSimplifiedSelected);
+            m_Toggle_ChineseTraditional.onValueChanged.AddListener(OnChineseTraditionalSelected);
+            m_Toggle_Korean.onValueChanged.AddListener(OnKoreanSelected);
             
-            m_CBtn_Confirm.OnHover.AddListener(()=>PlayUISound(10000));
-            m_CBtn_Confirm.OnClick.AddListener(OnSubmitButtonClick);
-            m_CBtn_Cancel.OnHover.AddListener(()=>PlayUISound(10000));
-            m_CBtn_Cancel.OnClick.AddListener(Close);
+            m_CommonButton_Confirm.OnHover.AddListener(()=>PlayUISound(10000));
+            m_CommonButton_Confirm.OnClick.AddListener(OnSubmitButtonClick);
+            m_CommonButton_Cancel.OnHover.AddListener(()=>PlayUISound(10000));
+            m_CommonButton_Cancel.OnClick.AddListener(Close);
             m_SelectedLanguage = Language.Unspecified;
         }
 		
@@ -148,32 +147,32 @@ namespace UGFExtensions.Hotfix
         {
             base.OnOpen(userData);
 
-            m_Tog_MusicMute.isOn = !GameEntry.Sound.IsMuted("Music");
+            m_Toggle_MusicMute.isOn = !GameEntry.Sound.IsMuted("Music");
             m_Slider_MusicVolume.value = GameEntry.Sound.GetVolume("Music");
 
-            m_Tog_SoundMute.isOn = !GameEntry.Sound.IsMuted("Sound");
+            m_Toggle_SoundMute.isOn = !GameEntry.Sound.IsMuted("Sound");
             m_Slider_SoundVolume.value = GameEntry.Sound.GetVolume("Sound");
 
-            m_Tog_UISoundMute.isOn = !GameEntry.Sound.IsMuted("UISound");
+            m_Toggle_UISoundMute.isOn = !GameEntry.Sound.IsMuted("UISound");
             m_Slider_UISoundVolume.value = GameEntry.Sound.GetVolume("UISound");
 
             m_SelectedLanguage = GameEntry.Localization.Language;
             switch (m_SelectedLanguage)
             {
                 case Language.English:
-                    m_Tog_English.isOn = true;
+                    m_Toggle_English.isOn = true;
                     break;
 
                 case Language.ChineseSimplified:
-                    m_Tog_ChineseSimplified.isOn = true;
+                    m_Toggle_ChineseSimplified.isOn = true;
                     break;
 
                 case Language.ChineseTraditional:
-                    m_Tog_ChineseTraditional.isOn = true;
+                    m_Toggle_ChineseTraditional.isOn = true;
                     break;
 
                 case Language.Korean:
-                    m_Tog_Korean.isOn = true;
+                    m_Toggle_Korean.isOn = true;
                     break;
 
                 default:
@@ -187,15 +186,15 @@ namespace UGFExtensions.Hotfix
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
 
-            if (m_Group_LanguageTips.gameObject.activeSelf)
+            if (m_CanvasGroup_LanguageTips.gameObject.activeSelf)
             {
-                m_Group_LanguageTips.alpha = 0.5f + 0.5f * Mathf.Sin(Mathf.PI * Time.time);
+                m_CanvasGroup_LanguageTips.alpha = 0.5f + 0.5f * Mathf.Sin(Mathf.PI * Time.time);
             }
         }
 
         private void RefreshLanguageTips()
         {
-            m_Group_LanguageTips.gameObject.SetActive(m_SelectedLanguage != GameEntry.Localization.Language);
+            m_CanvasGroup_LanguageTips.gameObject.SetActive(m_SelectedLanguage != GameEntry.Localization.Language);
         }
 	}
 }

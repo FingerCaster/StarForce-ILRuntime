@@ -70,77 +70,73 @@ namespace UGFExtensions.Editor
 
         public void GenCode(ComponentAutoBindTool bindTool)
         {
+            
             if (bindTool == null)
             {
                 return;
             }
-            string codePath = GetCodePath();
             string nameSpace = IsHotfix ? "UGFExtensions.Hotfix" : "UGFExtensions";
-            if (!Directory.Exists(GetCodeFolder()))
-            {
-                Directory.CreateDirectory(GetCodeFolder());
-            }
+            bindTool.SetClassName(CodeName);
+            bindTool.SetNameSpace(nameSpace);
+            ComponentAutoBindToolUtility.GenAutoBindCode(bindTool, CodeName, GetCodeFolder());
 
-            using (StreamWriter sw = new StreamWriter(codePath))
-            {
-                AddUsingNameSpace(sw, bindTool);
-                sw.WriteLine("");
-                sw.WriteLine("//自动生成于：" + DateTime.Now);
+            // using (StreamWriter sw = new StreamWriter(codePath))
+            // {
+            //     AddUsingNameSpace(sw, bindTool);
+            //     sw.WriteLine("");
+            //     sw.WriteLine("//自动生成于：" + DateTime.Now);
+            //
+            //     //命名空间
+            //     sw.WriteLine("namespace " + nameSpace);
+            //     sw.WriteLine("{");
+            //     sw.WriteLine("");
+            //
+            //     //类名
+            //     sw.WriteLine(IsPartial ? $"\tpublic partial class {CodeName}" : $"\tpublic class {CodeName}");
+            //
+            //     sw.WriteLine("\t{");
+            //     sw.WriteLine("");
+            //
+            //
+            //     foreach (ComponentAutoBindTool.BindData data in bindTool.BindDatas)
+            //     {
+            //         sw.WriteLine($"\t\tprivate {data.BindCom.GetType().Name} m_{data.Name};");
+            //     }
+            //
+            //     if (m_IsGenAutoBindCodeProperty)
+            //     {
+            //         foreach (ComponentAutoBindTool.BindData data in bindTool.BindDatas)
+            //         {
+            //             sw.WriteLine($"\t\tpublic {data.BindCom.GetType().Name} {data.Name}=>m_{data.Name};");
+            //         }
+            //     }
+            //
+            //     sw.WriteLine("");
+            //
+            //     sw.WriteLine("\t\tpublic void GetBindComponents(ComponentAutoBindTool autoBindTool)");
+            //     sw.WriteLine("\t\t{");
+            //
+            //     //根据索引获取
+            //
+            //     for (int i = 0; i < bindTool.BindDatas.Count; i++)
+            //     {
+            //         ComponentAutoBindTool.BindData data = bindTool.BindDatas[i];
+            //         string filedName = $"m_{data.Name}";
+            //         sw.WriteLine(
+            //             $"\t\t\t{filedName} = autoBindTool.GetBindComponent<{data.BindCom.GetType().Name}>({i});");
+            //     }
+            //
+            //
+            //     sw.WriteLine("\t\t}");
+            //
+            //     sw.WriteLine("");
+            //
+            //     sw.WriteLine("\t}");
+            //
+            //     sw.WriteLine("}");
+            // }
 
-                //命名空间
-                sw.WriteLine("namespace " + nameSpace);
-                sw.WriteLine("{");
-                sw.WriteLine("");
-
-                //类名
-                sw.WriteLine(IsPartial ? $"\tpublic partial class {CodeName}" : $"\tpublic class {CodeName}");
-
-                sw.WriteLine("\t{");
-                sw.WriteLine("");
-
-
-                foreach (ComponentAutoBindTool.BindData data in bindTool.BindDatas)
-                {
-                    sw.WriteLine($"\t\tprivate {data.BindCom.GetType().Name} m_{data.Name};");
-                }
-
-                if (m_IsGenAutoBindCodeProperty)
-                {
-                    foreach (ComponentAutoBindTool.BindData data in bindTool.BindDatas)
-                    {
-                        sw.WriteLine($"\t\tpublic {data.BindCom.GetType().Name} {data.Name}=>m_{data.Name};");
-                    }
-                }
-
-                sw.WriteLine("");
-
-                sw.WriteLine("\t\tpublic void GetBindComponents(ComponentAutoBindTool autoBindTool)");
-                sw.WriteLine("\t\t{");
-
-                //根据索引获取
-
-                for (int i = 0; i < bindTool.BindDatas.Count; i++)
-                {
-                    ComponentAutoBindTool.BindData data = bindTool.BindDatas[i];
-                    string filedName = $"m_{data.Name}";
-                    sw.WriteLine(
-                        $"\t\t\t{filedName} = autoBindTool.GetBindComponent<{data.BindCom.GetType().Name}>({i});");
-                }
-
-
-                sw.WriteLine("\t\t}");
-
-                sw.WriteLine("");
-
-                sw.WriteLine("\t}");
-
-                sw.WriteLine("}");
-            }
-
-            if (IsHotfix)
-            {
-                UpdateHotfixCompile();
-            }
+  
         }
 
         public override bool GenCode()

@@ -55,7 +55,7 @@ namespace ILRuntime.Runtime.Generated
             {
                 foreach(var m in lst)
                 {
-                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DRAircraft), typeof(System.Int32), typeof(System.Object)))
+                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DRAircraft), typeof(System.Int32)))
                     {
                         method = m.MakeGenericMethod(args);
                         app.RegisterCLRMethodRedirection(method, GetDataRow_1);
@@ -69,7 +69,7 @@ namespace ILRuntime.Runtime.Generated
             {
                 foreach(var m in lst)
                 {
-                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DRArmor), typeof(System.Int32), typeof(System.Object)))
+                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DRArmor), typeof(System.Int32)))
                     {
                         method = m.MakeGenericMethod(args);
                         app.RegisterCLRMethodRedirection(method, GetDataRow_2);
@@ -83,7 +83,7 @@ namespace ILRuntime.Runtime.Generated
             {
                 foreach(var m in lst)
                 {
-                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DRAsteroid), typeof(System.Int32), typeof(System.Object)))
+                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DRAsteroid), typeof(System.Int32)))
                     {
                         method = m.MakeGenericMethod(args);
                         app.RegisterCLRMethodRedirection(method, GetDataRow_3);
@@ -97,7 +97,7 @@ namespace ILRuntime.Runtime.Generated
             {
                 foreach(var m in lst)
                 {
-                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DRThruster), typeof(System.Int32), typeof(System.Object)))
+                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DRThruster), typeof(System.Int32)))
                     {
                         method = m.MakeGenericMethod(args);
                         app.RegisterCLRMethodRedirection(method, GetDataRow_4);
@@ -111,7 +111,7 @@ namespace ILRuntime.Runtime.Generated
             {
                 foreach(var m in lst)
                 {
-                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DRWeapon), typeof(System.Int32), typeof(System.Object)))
+                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DRWeapon), typeof(System.Int32)))
                     {
                         method = m.MakeGenericMethod(args);
                         app.RegisterCLRMethodRedirection(method, GetDataRow_5);
@@ -125,7 +125,7 @@ namespace ILRuntime.Runtime.Generated
             {
                 foreach(var m in lst)
                 {
-                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DREntity), typeof(System.Int32), typeof(System.Object)))
+                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DREntity), typeof(System.Int32)))
                     {
                         method = m.MakeGenericMethod(args);
                         app.RegisterCLRMethodRedirection(method, GetDataRow_6);
@@ -139,7 +139,7 @@ namespace ILRuntime.Runtime.Generated
             {
                 foreach(var m in lst)
                 {
-                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DRScene), typeof(System.Int32), typeof(System.Object)))
+                    if(m.MatchGenericParameters(args, typeof(UGFExtensions.DRScene), typeof(System.Int32)))
                     {
                         method = m.MakeGenericMethod(args);
                         app.RegisterCLRMethodRedirection(method, GetDataRow_7);
@@ -177,20 +177,16 @@ namespace ILRuntime.Runtime.Generated
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 3);
+            StackObject* __ret = ILIntepreter.Minus(__esp, 2);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Object @userdata = (System.Object)typeof(System.Object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
-            __intp.Free(ptr_of_this_method);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.Int32 @id = ptr_of_this_method->Value;
 
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             UGFExtensions.DataTableExtensionComponent instance_of_this_method = (UGFExtensions.DataTableExtensionComponent)typeof(UGFExtensions.DataTableExtensionComponent).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
             __intp.Free(ptr_of_this_method);
 
-            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DRAircraft>(@id, @userdata);
+            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DRAircraft>(@id);
 
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
@@ -199,20 +195,16 @@ namespace ILRuntime.Runtime.Generated
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 3);
+            StackObject* __ret = ILIntepreter.Minus(__esp, 2);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Object @userdata = (System.Object)typeof(System.Object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
-            __intp.Free(ptr_of_this_method);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.Int32 @id = ptr_of_this_method->Value;
 
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             UGFExtensions.DataTableExtensionComponent instance_of_this_method = (UGFExtensions.DataTableExtensionComponent)typeof(UGFExtensions.DataTableExtensionComponent).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
             __intp.Free(ptr_of_this_method);
 
-            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DRArmor>(@id, @userdata);
+            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DRArmor>(@id);
 
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
@@ -221,20 +213,16 @@ namespace ILRuntime.Runtime.Generated
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 3);
+            StackObject* __ret = ILIntepreter.Minus(__esp, 2);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Object @userdata = (System.Object)typeof(System.Object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
-            __intp.Free(ptr_of_this_method);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.Int32 @id = ptr_of_this_method->Value;
 
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             UGFExtensions.DataTableExtensionComponent instance_of_this_method = (UGFExtensions.DataTableExtensionComponent)typeof(UGFExtensions.DataTableExtensionComponent).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
             __intp.Free(ptr_of_this_method);
 
-            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DRAsteroid>(@id, @userdata);
+            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DRAsteroid>(@id);
 
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
@@ -243,20 +231,16 @@ namespace ILRuntime.Runtime.Generated
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 3);
+            StackObject* __ret = ILIntepreter.Minus(__esp, 2);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Object @userdata = (System.Object)typeof(System.Object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
-            __intp.Free(ptr_of_this_method);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.Int32 @id = ptr_of_this_method->Value;
 
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             UGFExtensions.DataTableExtensionComponent instance_of_this_method = (UGFExtensions.DataTableExtensionComponent)typeof(UGFExtensions.DataTableExtensionComponent).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
             __intp.Free(ptr_of_this_method);
 
-            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DRThruster>(@id, @userdata);
+            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DRThruster>(@id);
 
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
@@ -265,20 +249,16 @@ namespace ILRuntime.Runtime.Generated
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 3);
+            StackObject* __ret = ILIntepreter.Minus(__esp, 2);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Object @userdata = (System.Object)typeof(System.Object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
-            __intp.Free(ptr_of_this_method);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.Int32 @id = ptr_of_this_method->Value;
 
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             UGFExtensions.DataTableExtensionComponent instance_of_this_method = (UGFExtensions.DataTableExtensionComponent)typeof(UGFExtensions.DataTableExtensionComponent).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
             __intp.Free(ptr_of_this_method);
 
-            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DRWeapon>(@id, @userdata);
+            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DRWeapon>(@id);
 
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
@@ -287,20 +267,16 @@ namespace ILRuntime.Runtime.Generated
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 3);
+            StackObject* __ret = ILIntepreter.Minus(__esp, 2);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Object @userdata = (System.Object)typeof(System.Object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
-            __intp.Free(ptr_of_this_method);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.Int32 @id = ptr_of_this_method->Value;
 
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             UGFExtensions.DataTableExtensionComponent instance_of_this_method = (UGFExtensions.DataTableExtensionComponent)typeof(UGFExtensions.DataTableExtensionComponent).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
             __intp.Free(ptr_of_this_method);
 
-            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DREntity>(@id, @userdata);
+            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DREntity>(@id);
 
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
@@ -309,20 +285,16 @@ namespace ILRuntime.Runtime.Generated
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 3);
+            StackObject* __ret = ILIntepreter.Minus(__esp, 2);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Object @userdata = (System.Object)typeof(System.Object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
-            __intp.Free(ptr_of_this_method);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.Int32 @id = ptr_of_this_method->Value;
 
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             UGFExtensions.DataTableExtensionComponent instance_of_this_method = (UGFExtensions.DataTableExtensionComponent)typeof(UGFExtensions.DataTableExtensionComponent).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
             __intp.Free(ptr_of_this_method);
 
-            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DRScene>(@id, @userdata);
+            var result_of_this_method = instance_of_this_method.GetDataRow<UGFExtensions.DRScene>(@id);
 
             return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
@@ -334,7 +306,7 @@ namespace ILRuntime.Runtime.Generated
             StackObject* __ret = ILIntepreter.Minus(__esp, 4);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Boolean @isCacheFileStream = ptr_of_this_method->Value == 1;
+            System.Boolean @isCache = ptr_of_this_method->Value == 1;
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
             System.String @assetName = (System.String)typeof(System.String).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
@@ -348,7 +320,7 @@ namespace ILRuntime.Runtime.Generated
             UGFExtensions.DataTableExtensionComponent instance_of_this_method = (UGFExtensions.DataTableExtensionComponent)typeof(UGFExtensions.DataTableExtensionComponent).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
             __intp.Free(ptr_of_this_method);
 
-            instance_of_this_method.LoadDataTableRowConfig(@type, @assetName, @isCacheFileStream);
+            instance_of_this_method.LoadDataTableRowConfig(@type, @assetName, @isCache);
 
             return __ret;
         }

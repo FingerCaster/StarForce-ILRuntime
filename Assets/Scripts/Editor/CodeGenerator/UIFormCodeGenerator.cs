@@ -113,19 +113,12 @@ namespace UGFExtensions.Editor
                 sw.WriteLine("");
                 if (m_IsGenAutoBindCode)
                 {
-                    sw.WriteLine(
-                        $"\t\t\tComponentAutoBindTool autoBindTool = gameObject.GetComponent<ComponentAutoBindTool>();");
-                    sw.WriteLine($"\t\t\tGetBindComponents(autoBindTool);");
+                    sw.WriteLine($"\t\t\tGetBindComponents(gameObject);");
                 }
 
                 sw.WriteLine("\t\t}");
                 sw.WriteLine("\t}");
                 sw.WriteLine("}");
-            }
-
-            if (IsHotfix)
-            {
-                UpdateHotfixCompile();
             }
         }
 

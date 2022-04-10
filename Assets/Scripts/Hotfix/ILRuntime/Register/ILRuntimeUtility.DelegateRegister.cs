@@ -22,6 +22,8 @@ namespace UGFExtensions.Hotfix
             appDomain.DelegateManager.RegisterMethodDelegate<System.String, GameFramework.Resource.LoadResourceStatus, System.String, System.Object>();
             appDomain.DelegateManager.RegisterMethodDelegate<System.Object>();
             appDomain.DelegateManager.RegisterMethodDelegate<System.Int64>();
+            appDomain.DelegateManager.RegisterMethodDelegate<System.Int64, UGFExtensions.LoopTask>();
+
             //注册委托
             appDomain.DelegateManager.RegisterDelegateConvertor<GameFramework.GameFrameworkAction<System.Object>>(
                 (act) =>

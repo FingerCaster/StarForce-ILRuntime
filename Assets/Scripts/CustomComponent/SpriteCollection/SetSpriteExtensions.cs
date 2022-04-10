@@ -2,7 +2,7 @@ using UnityEngine.UI;
 
 namespace UGFExtensions.SpriteCollection
 {
-    public static class SetSpriteExtensions
+    public static partial class SetSpriteExtensions
     {
         /// <summary>
         /// 设置精灵

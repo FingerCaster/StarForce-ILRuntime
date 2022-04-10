@@ -68,6 +68,8 @@ namespace UGFExtensions.Hotfix
             
             //这个实例默认创建的CLRInstance不是通过AddComponent出来的有效实例，所以得手动替换
             ilInstance.CLRInstance = clrInstance;
+            var constructor = type.GetConstructor(0);
+            appDomain.Invoke(constructor, ilInstance);
             return clrInstance;
         }
 

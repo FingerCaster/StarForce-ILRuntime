@@ -73,15 +73,26 @@ namespace ILRuntime.Runtime.Generated
             args = new Type[]{};
             method = type.GetMethod("SetResult", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, SetResult_4);
-            args = new Type[]{typeof(System.Runtime.CompilerServices.IAsyncStateMachine)};
-            method = type.GetMethod("SetStateMachine", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, SetStateMachine_5);
-            args = new Type[]{typeof(System.Runtime.CompilerServices.TaskAwaiter<System.Boolean>), typeof(UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor)};
+            args = new Type[]{typeof(ET.ETTask<System.Boolean>), typeof(UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor)};
             if (genericMethods.TryGetValue("AwaitUnsafeOnCompleted", out lst))
             {
                 foreach(var m in lst)
                 {
-                    if(m.MatchGenericParameters(args, typeof(void), typeof(System.Runtime.CompilerServices.TaskAwaiter<System.Boolean>).MakeByRefType(), typeof(UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor).MakeByRefType()))
+                    if(m.MatchGenericParameters(args, typeof(void), typeof(ET.ETTask<System.Boolean>).MakeByRefType(), typeof(UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor).MakeByRefType()))
+                    {
+                        method = m.MakeGenericMethod(args);
+                        app.RegisterCLRMethodRedirection(method, AwaitUnsafeOnCompleted_5);
+
+                        break;
+                    }
+                }
+            }
+            args = new Type[]{typeof(ET.ETTask), typeof(UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor)};
+            if (genericMethods.TryGetValue("AwaitUnsafeOnCompleted", out lst))
+            {
+                foreach(var m in lst)
+                {
+                    if(m.MatchGenericParameters(args, typeof(void), typeof(ET.ETTask).MakeByRefType(), typeof(UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor).MakeByRefType()))
                     {
                         method = m.MakeGenericMethod(args);
                         app.RegisterCLRMethodRedirection(method, AwaitUnsafeOnCompleted_6);
@@ -419,30 +430,7 @@ namespace ILRuntime.Runtime.Generated
             return __ret;
         }
 
-        static StackObject* SetStateMachine_5(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
-        {
-            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
-            StackObject* ptr_of_this_method;
-            StackObject* __ret = ILIntepreter.Minus(__esp, 2);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
-            System.Runtime.CompilerServices.IAsyncStateMachine @stateMachine = (System.Runtime.CompilerServices.IAsyncStateMachine)typeof(System.Runtime.CompilerServices.IAsyncStateMachine).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
-            __intp.Free(ptr_of_this_method);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
-            ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
-            System.Runtime.CompilerServices.AsyncVoidMethodBuilder instance_of_this_method = (System.Runtime.CompilerServices.AsyncVoidMethodBuilder)typeof(System.Runtime.CompilerServices.AsyncVoidMethodBuilder).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)16);
-
-            instance_of_this_method.SetStateMachine(@stateMachine);
-
-            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
-            WriteBackInstance(__domain, ptr_of_this_method, __mStack, ref instance_of_this_method);
-
-            __intp.Free(ptr_of_this_method);
-            return __ret;
-        }
-
-        static StackObject* AwaitUnsafeOnCompleted_6(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        static StackObject* AwaitUnsafeOnCompleted_5(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
         {
             ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
             StackObject* ptr_of_this_method;
@@ -452,13 +440,13 @@ namespace ILRuntime.Runtime.Generated
             UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor @stateMachine = (UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor)typeof(UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor).CheckCLRTypes(__intp.RetriveObject(ptr_of_this_method, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
-            System.Runtime.CompilerServices.TaskAwaiter<System.Boolean> @awaiter = (System.Runtime.CompilerServices.TaskAwaiter<System.Boolean>)typeof(System.Runtime.CompilerServices.TaskAwaiter<System.Boolean>).CheckCLRTypes(__intp.RetriveObject(ptr_of_this_method, __mStack), (CLR.Utils.Extensions.TypeFlags)16);
+            ET.ETTask<System.Boolean> @awaiter = (ET.ETTask<System.Boolean>)typeof(ET.ETTask<System.Boolean>).CheckCLRTypes(__intp.RetriveObject(ptr_of_this_method, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
             ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
             System.Runtime.CompilerServices.AsyncVoidMethodBuilder instance_of_this_method = (System.Runtime.CompilerServices.AsyncVoidMethodBuilder)typeof(System.Runtime.CompilerServices.AsyncVoidMethodBuilder).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)16);
 
-            instance_of_this_method.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<System.Boolean>, UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor>(ref @awaiter, ref @stateMachine);
+            instance_of_this_method.AwaitUnsafeOnCompleted<ET.ETTask<System.Boolean>, UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor>(ref @awaiter, ref @stateMachine);
 
             ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
             switch(ptr_of_this_method->ObjectType)
@@ -563,7 +551,142 @@ namespace ILRuntime.Runtime.Generated
                     break;
                  case ObjectTypes.ArrayReference:
                     {
-                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as System.Runtime.CompilerServices.TaskAwaiter<System.Boolean>[];
+                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as ET.ETTask<System.Boolean>[];
+                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = @awaiter;
+                    }
+                    break;
+            }
+
+            __intp.Free(ptr_of_this_method);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            WriteBackInstance(__domain, ptr_of_this_method, __mStack, ref instance_of_this_method);
+
+            __intp.Free(ptr_of_this_method);
+            return __ret;
+        }
+
+        static StackObject* AwaitUnsafeOnCompleted_6(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        {
+            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
+            StackObject* ptr_of_this_method;
+            StackObject* __ret = ILIntepreter.Minus(__esp, 3);
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
+            UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor @stateMachine = (UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor)typeof(UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor).CheckCLRTypes(__intp.RetriveObject(ptr_of_this_method, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
+            ET.ETTask @awaiter = (ET.ETTask)typeof(ET.ETTask).CheckCLRTypes(__intp.RetriveObject(ptr_of_this_method, __mStack), (CLR.Utils.Extensions.TypeFlags)0);
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
+            System.Runtime.CompilerServices.AsyncVoidMethodBuilder instance_of_this_method = (System.Runtime.CompilerServices.AsyncVoidMethodBuilder)typeof(System.Runtime.CompilerServices.AsyncVoidMethodBuilder).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack), (CLR.Utils.Extensions.TypeFlags)16);
+
+            instance_of_this_method.AwaitUnsafeOnCompleted<ET.ETTask, UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor>(ref @awaiter, ref @stateMachine);
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
+            switch(ptr_of_this_method->ObjectType)
+            {
+                case ObjectTypes.StackObjectReference:
+                    {
+                        var ___dst = ILIntepreter.ResolveReference(ptr_of_this_method);
+                        object ___obj = @stateMachine;
+                        if (___dst->ObjectType >= ObjectTypes.Object)
+                        {
+                            if (___obj is CrossBindingAdaptorType)
+                                ___obj = ((CrossBindingAdaptorType)___obj).ILInstance;
+                            __mStack[___dst->Value] = ___obj;
+                        }
+                        else
+                        {
+                            ILIntepreter.UnboxObject(___dst, ___obj, __mStack, __domain);
+                        }
+                    }
+                    break;
+                case ObjectTypes.FieldReference:
+                    {
+                        var ___obj = __mStack[ptr_of_this_method->Value];
+                        if(___obj is ILTypeInstance)
+                        {
+                            ((ILTypeInstance)___obj)[ptr_of_this_method->ValueLow] = @stateMachine;
+                        }
+                        else
+                        {
+                            var ___type = __domain.GetType(___obj.GetType()) as CLRType;
+                            ___type.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, @stateMachine);
+                        }
+                    }
+                    break;
+                case ObjectTypes.StaticFieldReference:
+                    {
+                        var ___type = __domain.GetType(ptr_of_this_method->Value);
+                        if(___type is ILType)
+                        {
+                            ((ILType)___type).StaticInstance[ptr_of_this_method->ValueLow] = @stateMachine;
+                        }
+                        else
+                        {
+                            ((CLRType)___type).SetStaticFieldValue(ptr_of_this_method->ValueLow, @stateMachine);
+                        }
+                    }
+                    break;
+                 case ObjectTypes.ArrayReference:
+                    {
+                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as UGFExtensions.Hotfix.IAsyncStateMachineAdaptor.Adaptor[];
+                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = @stateMachine;
+                    }
+                    break;
+            }
+
+            __intp.Free(ptr_of_this_method);
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
+            switch(ptr_of_this_method->ObjectType)
+            {
+                case ObjectTypes.StackObjectReference:
+                    {
+                        var ___dst = ILIntepreter.ResolveReference(ptr_of_this_method);
+                        object ___obj = @awaiter;
+                        if (___dst->ObjectType >= ObjectTypes.Object)
+                        {
+                            if (___obj is CrossBindingAdaptorType)
+                                ___obj = ((CrossBindingAdaptorType)___obj).ILInstance;
+                            __mStack[___dst->Value] = ___obj;
+                        }
+                        else
+                        {
+                            ILIntepreter.UnboxObject(___dst, ___obj, __mStack, __domain);
+                        }
+                    }
+                    break;
+                case ObjectTypes.FieldReference:
+                    {
+                        var ___obj = __mStack[ptr_of_this_method->Value];
+                        if(___obj is ILTypeInstance)
+                        {
+                            ((ILTypeInstance)___obj)[ptr_of_this_method->ValueLow] = @awaiter;
+                        }
+                        else
+                        {
+                            var ___type = __domain.GetType(___obj.GetType()) as CLRType;
+                            ___type.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, @awaiter);
+                        }
+                    }
+                    break;
+                case ObjectTypes.StaticFieldReference:
+                    {
+                        var ___type = __domain.GetType(ptr_of_this_method->Value);
+                        if(___type is ILType)
+                        {
+                            ((ILType)___type).StaticInstance[ptr_of_this_method->ValueLow] = @awaiter;
+                        }
+                        else
+                        {
+                            ((CLRType)___type).SetStaticFieldValue(ptr_of_this_method->ValueLow, @awaiter);
+                        }
+                    }
+                    break;
+                 case ObjectTypes.ArrayReference:
+                    {
+                        var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as ET.ETTask[];
                         instance_of_arrayReference[ptr_of_this_method->ValueLow] = @awaiter;
                     }
                     break;

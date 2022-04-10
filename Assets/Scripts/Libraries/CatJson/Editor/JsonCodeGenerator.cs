@@ -29,7 +29,7 @@ namespace CatJson.Editor
         /// </summary>
         private static Queue<Type> needGenTypes = new Queue<Type>();
 
-        [MenuItem("Tools/CatJson/清理已生成的Json解析-转换代码")]
+        [MenuItem("CatJson/清理已生成的Json解析-转换代码")]
         private static void ClearJsonCode()
         {
             ClearGenCodeDir();
@@ -42,7 +42,7 @@ namespace CatJson.Editor
             EditorUtility.DisplayDialog("提示", "已清理", "确认");
         }
 
-        [MenuItem("Tools/CatJson/预生成Json解析-转换代码")]
+        [MenuItem("CatJson/预生成Json解析-转换代码")]
         private static void GenJsonCode()
         {
 

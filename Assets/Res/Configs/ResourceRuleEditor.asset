@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99b93107d7bc31740838a156d99e161c, type: 3}
+  m_Script: {fileID: 11500000, guid: 50ad2d721b5da424096e85539f9ff262, type: 3}
   m_Name: ResourceRuleEditor
   m_EditorClassIdentifier: 
   rules:
@@ -26,9 +26,9 @@ MonoBehaviour:
   - valid: 1
     name: 
     variant: 
-    fileSystem: 
+    fileSystem: DataTableNotHotfix
     groups: 
-    assetsDirectoryPath: Assets/Res/DataTables
+    assetsDirectoryPath: Assets/Res/DataTables/NotHotfix
     loadType: 4
     packed: 1
     filterType: 1
@@ -36,7 +36,7 @@ MonoBehaviour:
   - valid: 1
     name: 
     variant: 
-    fileSystem: 
+    fileSystem: DataTableHotfix
     groups: 
     assetsDirectoryPath: Assets/Res/DataTables/Hotfix
     loadType: 4

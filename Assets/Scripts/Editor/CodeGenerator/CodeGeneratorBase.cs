@@ -65,10 +65,5 @@ namespace UGFExtensions.Editor
         /// 生成代码
         /// </summary>
         public abstract bool GenCode();
-
-        public void UpdateHotfixCompile()
-        {
-            HotfixProjectUtility.AddCompileItem(Path.Combine(HotfixCodeFolder,CodeName+Suffix));
-        }
     }
 }

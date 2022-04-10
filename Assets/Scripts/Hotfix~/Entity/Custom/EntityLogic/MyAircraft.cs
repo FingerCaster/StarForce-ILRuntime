@@ -5,6 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 
+using GameFramework;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
@@ -14,7 +15,7 @@ namespace UGFExtensions.Hotfix
     {
         [SerializeField] private MyAircraftData m_MyAircraftData = null;
 
-        private Rect m_PlayerMoveBoundary = default(Rect);
+        private Rect m_PlayerMoveBoundary;
         private Vector3 m_TargetPosition = Vector3.zero;
 
         protected override void OnShow(object userData)
@@ -22,6 +23,7 @@ namespace UGFExtensions.Hotfix
             base.OnShow(userData);
 
             m_MyAircraftData = userData as MyAircraftData;
+            m_PlayerMoveBoundary = Rect.zero;
             if (m_MyAircraftData == null)
             {
                 Log.Error("My aircraft data is invalid.");
@@ -38,12 +40,16 @@ namespace UGFExtensions.Hotfix
             m_PlayerMoveBoundary = new Rect(sceneBackground.PlayerMoveBoundary.bounds.min.x,
                 sceneBackground.PlayerMoveBoundary.bounds.min.z,
                 sceneBackground.PlayerMoveBoundary.bounds.size.x, sceneBackground.PlayerMoveBoundary.bounds.size.z);
+
+            Log.Warning(m_PlayerMoveBoundary);
+            Log.Warning(Utility.Json.ToJson(m_PlayerMoveBoundary));
+            
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
-
+            
             if (Input.GetMouseButton(0))
             {
                 Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);

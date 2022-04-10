@@ -33,7 +33,6 @@ namespace UGFExtensions.Editor
         {
             string[] sps = m_HelperTypeName.stringValue.Split('.');
             string helperName = sps[sps.Length - 1].Replace("Helper", "");
-            HotfixProjectUtility.ChangePostBuildEvent($"$(SolutionDir)Tools/{helperName}PostBuildEvent.bat $(TargetDir)");
         }
 
         protected override void OnCompileComplete()

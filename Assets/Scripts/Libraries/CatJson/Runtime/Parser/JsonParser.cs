@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-#if ILRuntime
+#if FUCK_LUA
 using ILRuntime.CLR.Method;
 using ILRuntime.CLR.TypeSystem;
 using ILRuntime.CLR.Utils;
@@ -49,6 +49,66 @@ namespace CatJson
         /// </summary>
         public static Dictionary<Type, HashSet<string>> IgnoreSet = new Dictionary<Type, HashSet<string>>();
 
+
+
+
+        /// <summary>
+        /// 将type的公有实例字段和属性都放入字典中缓存
+        /// </summary>
+        private static void AddToReflectionMap(Type type)
+        {
+            IgnoreSet.TryGetValue(type, out HashSet<string> set);
+
+            PropertyInfo[] pis = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            Dictionary<RangeString, PropertyInfo>  dict1 = new Dictionary<RangeString, PropertyInfo>(pis.Length);
+            for (int i = 0; i < pis.Length; i++)
+            {
+                PropertyInfo pi = pis[i];
+
+                if (Attribute.IsDefined(pi, typeof(JsonIgnoreAttribute)))
+                {
+                    //需要忽略
+                    continue;
+                }
+
+                if (set != null && set.Contains(pi.Name))
+                {
+                    //需要忽略
+                    continue;
+                }
+
+                if (pi.SetMethod != null && pi.GetMethod != null && pi.Name != "Item")
+                {
+                    //属性必须同时具有get set 并且不能是索引器item
+                    dict1.Add(new RangeString(pi.Name), pi);
+                }
+                    
+            }
+            propertyInfoDict.Add(type, dict1);
+
+            FieldInfo[] fis = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
+            Dictionary<RangeString, FieldInfo> dict2 = new Dictionary<RangeString, FieldInfo>(fis.Length);
+            for (int i = 0; i < fis.Length; i++)
+            {
+                FieldInfo fi = fis[i];
+
+                if (Attribute.IsDefined(fi,typeof(JsonIgnoreAttribute)))
+                {
+                    //需要忽略
+                    continue;
+                }
+
+                if (set != null && set.Contains(fi.Name))
+                {
+                    //需要忽略
+                    continue;
+                }
+
+                dict2.Add(new RangeString(fi.Name), fi);
+            }
+            fieldInfoDict.Add(type, dict2);
+        }
+        
         /// <summary>
         /// 解析Json对象的通用流程
         /// </summary>
@@ -68,6 +128,7 @@ namespace CatJson
 
                 //提取value
                 //array和json obj需要完整的[]和{}，所以只能look
+                //此时curIndex停留在value后的第一个字符上
                 TokenType nextTokenType = Lexer.LookNextTokenType();
 
                 action(userdata1,userdata2,isIntKey,key, nextTokenType);
@@ -130,122 +191,34 @@ namespace CatJson
             //跳过]
             Lexer.GetNextTokenByType(TokenType.RightBracket);
         }
+        
 
         /// <summary>
-        /// 将type的公有实例字段和属性都放入字典中缓存
+        /// 获取用于多态序列化的真实类型的json value字符串
         /// </summary>
-        private static void AddToReflectionMap(Type type)
+        private static string GetRealTypeJsonValue(Type realType)
         {
-            IgnoreSet.TryGetValue(type, out HashSet<string> set);
-
-            PropertyInfo[] pis = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
-            Dictionary<RangeString, PropertyInfo> dict1 = null;
-            if (pis.Length > 0)
+#if FUCK_LUA
+            if (realType is ILRuntimeType ilrtType)
             {
-                dict1 = new Dictionary<RangeString, PropertyInfo>(pis.Length);
-                for (int i = 0; i < pis.Length; i++)
-                {
-                    PropertyInfo pi = pis[i];
-
-                    if (Attribute.IsDefined(pi, typeof(JsonIgnoreAttribute)))
-                    {
-                        //需要忽略
-                        continue;
-                    }
-
-                    if (set != null && set.Contains(pi.Name))
-                    {
-                        //需要忽略
-                        continue;
-                    }
-
-                    if (pi.SetMethod != null && pi.GetMethod != null && pi.Name != "Item")
-                    {
-                        //属性必须同时具有get set 并且不能是索引器item
-                        dict1.Add(new RangeString(pi.Name), pi);
-                    }
-                    
-                }
-                
-            }
-            propertyInfoDict.Add(type, dict1);
-
-            FieldInfo[] fis = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
-            Dictionary<RangeString, FieldInfo> dict2 = null;
-            if (fis.Length > 0)
-            {
-                dict2 = new Dictionary<RangeString, FieldInfo>(fis.Length);
-                for (int i = 0; i < fis.Length; i++)
-                {
-                    FieldInfo fi = fis[i];
-
-                    if (Attribute.IsDefined(fi,typeof(JsonIgnoreAttribute)))
-                    {
-                        //需要忽略
-                        continue;
-                    }
-
-                    if (set != null && set.Contains(fi.Name))
-                    {
-                        //需要忽略
-                        continue;
-                    }
-
-                    dict2.Add(new RangeString(fi.Name), fi);
-                }
-
-            }
-            fieldInfoDict.Add(type, dict2);
-        }
-
-        /// <summary>
-        /// 检查Type,如果是热更层的需要进行转换
-        /// </summary>
-        private static Type CheckType(Type type)
-        {
-#if ILRuntime
-            if (type is ILRuntimeWrapperType wt)
-            {
-                return wt.RealType;
+                 return $"{ilrtType.FullName}";
             }
 #endif
-            return type;
+            return $"{realType.FullName},{realType.Assembly.GetName().Name}";
         }
+        
 
-        /// <summary>
-        /// 获取obj的Type
-        /// </summary>
-        private static Type GetType(object obj)
-        {
-#if ILRuntime
-            if (obj is ILTypeInstance ins)
-            {
-               return ins.Type.ReflectionType;
-            }
-            if (obj is CrossBindingAdaptorType cross)
-            {
-                return cross.ILInstance.Type.ReflectionType;
-            }
-#endif
-            return obj.GetType();
-        }
-
-        /// <summary>
-        /// 创建type的实例
-        /// </summary>
-        private static object CreateInstance(Type type)
-        {
-#if ILRuntime
-            if (type is ILRuntimeType ilrtType)
-            {
-                return ilrtType.ILType.Instantiate();
-            }
-#endif
-            return Activator.CreateInstance(type);
-        }
-#if ILRuntime
-        public unsafe static void RegisterILRuntimeCLRRedirection(ILRuntime.Runtime.Enviorment.AppDomain appdomain)
-        {
+        
+#if FUCK_LUA
+        
+         /// <summary>
+         /// CatJson的ILRuntime重定向，需要在初始化ILRuntime时调用此方法
+         /// </summary>
+         /// <param name="appdomain"></param>
+         public unsafe static void RegisterILRuntimeCLRRedirection(ILRuntime.Runtime.Enviorment.AppDomain appdomain)
+         {
+            TypeUtil.AppDomain = appdomain;
+            
             foreach (MethodInfo mi in typeof(JsonParser).GetMethods())
             {
                 if (mi.Name == "ParseJson" && mi.IsGenericMethodDefinition)
@@ -275,7 +248,7 @@ namespace CatJson
 
             Type type = method.GenericArguments[0].ReflectionType;
 
-            object result_of_this_method = ParseJson(json, type,reflection);
+            object result_of_this_method = ParseJson(json, type);
 
             return ILIntepreter.PushObject(__ret, mStack, result_of_this_method);
         }
@@ -285,21 +258,13 @@ namespace CatJson
             ILRuntime.Runtime.Enviorment.AppDomain __domain = intp.AppDomain;
             StackObject* ptr_of_this_method;
             StackObject* __ret = ILIntepreter.Minus(esp, 2);
-
             ptr_of_this_method = ILIntepreter.Minus(esp, 1);
             bool reflection = ptr_of_this_method->Value == 1;
-
             ptr_of_this_method = ILIntepreter.Minus(esp, 2);
-            ILTypeInstance obj =
-                (ILTypeInstance)typeof(ILTypeInstance).CheckCLRTypes(
-                    StackObject.ToObject(ptr_of_this_method, __domain, mStack), 0);
-
+            object obj = typeof(object).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, mStack), 0);
             intp.Free(ptr_of_this_method);
-
             Type type = method.GenericArguments[0].ReflectionType;
-
             string result_of_this_method = ToJson(obj, type, reflection);
-
             return ILIntepreter.PushObject(__ret, mStack, result_of_this_method);
         }
 #endif

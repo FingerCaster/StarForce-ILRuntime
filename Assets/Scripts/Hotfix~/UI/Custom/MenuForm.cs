@@ -11,19 +11,18 @@ namespace UGFExtensions.Hotfix
         {
             base.OnInit(userdata);
 
-            ComponentAutoBindTool autoBindTool = gameObject.GetComponent<ComponentAutoBindTool>();
-            GetBindComponents(autoBindTool);
-            m_CBtn_Setting.OnHover.AddListener(OnHoverPlaySound);
-            m_CBtn_Setting.OnClick.AddListener(OnSettingButtonClick);
+            GetBindComponents(gameObject);
+            m_CommonButton_Setting.OnHover.AddListener(OnHoverPlaySound);
+            m_CommonButton_Setting.OnClick.AddListener(OnSettingButtonClick);
             
-            m_CBtn_Quit.OnHover.AddListener(OnHoverPlaySound);
-            m_CBtn_Quit.OnClick.AddListener(OnQuitButtonClick);
+            m_CommonButton_Quit.OnHover.AddListener(OnHoverPlaySound);
+            m_CommonButton_Quit.OnClick.AddListener(OnQuitButtonClick);
             
-            m_CBtn_About.OnHover.AddListener(OnHoverPlaySound);
-            m_CBtn_About.OnClick.AddListener(OnAboutButtonClick);
+            m_CommonButton_About.OnHover.AddListener(OnHoverPlaySound);
+            m_CommonButton_About.OnClick.AddListener(OnAboutButtonClick);
                 
-            m_CBtn_Start.OnHover.AddListener(OnHoverPlaySound);
-            m_CBtn_Start.OnClick.AddListener(OnStartButtonClick);
+            m_CommonButton_Start.OnHover.AddListener(OnHoverPlaySound);
+            m_CommonButton_Start.OnClick.AddListener(OnStartButtonClick);
         }
 
         private void OnHoverPlaySound()
@@ -74,7 +73,7 @@ namespace UGFExtensions.Hotfix
                 return;
             }
 
-            m_CBtn_Quit.gameObject.SetActive(Application.platform != RuntimePlatform.IPhonePlayer);
+            m_CommonButton_Quit.gameObject.SetActive(Application.platform != RuntimePlatform.IPhonePlayer);
         }
 
         protected override void OnClose(bool isShutdown, object userdata)
