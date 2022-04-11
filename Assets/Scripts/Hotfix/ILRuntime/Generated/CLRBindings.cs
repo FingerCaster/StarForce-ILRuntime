@@ -126,7 +126,6 @@ namespace ILRuntime.Runtime.Generated
             UnityEngine_Application_Binding.Register(app);
             UnityGameFramework_Runtime_VarObject_Binding.Register(app);
             GameFramework_Variable_1_Object_Binding.Register(app);
-            UGFExtensions_Hotfix_TestMono_Binding.Register(app);
             System_Collections_Generic_Dictionary_2_Byte_ILTypeInstance_Binding.Register(app);
             GameFramework_Variable_1_Byte_Binding.Register(app);
             UnityGameFramework_Runtime_ConfigComponent_Binding.Register(app);

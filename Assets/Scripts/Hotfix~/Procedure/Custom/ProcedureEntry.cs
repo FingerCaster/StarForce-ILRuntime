@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
@@ -19,8 +20,6 @@ namespace UGFExtensions.Hotfix
                 };
                 procedureOwner.SetData(Constant.ProcedureData.ProcedureType, varObject);
                 ChangeState<ProcedureWaitForDebug>(procedureOwner);
-                TestMono testMono = new TestMono();
-                testMono.Start();
             }
             else
             {
