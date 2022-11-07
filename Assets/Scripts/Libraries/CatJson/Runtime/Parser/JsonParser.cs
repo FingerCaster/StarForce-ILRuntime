@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-#if FUCK_LUA
+#if ILRuntime
 using ILRuntime.CLR.Method;
 using ILRuntime.CLR.TypeSystem;
 using ILRuntime.CLR.Utils;
@@ -198,7 +198,7 @@ namespace CatJson
         /// </summary>
         private static string GetRealTypeJsonValue(Type realType)
         {
-#if FUCK_LUA
+#if ILRuntime
             if (realType is ILRuntimeType ilrtType)
             {
                  return $"{ilrtType.FullName}";
@@ -209,7 +209,7 @@ namespace CatJson
         
 
         
-#if FUCK_LUA
+#if ILRuntime
         
          /// <summary>
          /// CatJson的ILRuntime重定向，需要在初始化ILRuntime时调用此方法

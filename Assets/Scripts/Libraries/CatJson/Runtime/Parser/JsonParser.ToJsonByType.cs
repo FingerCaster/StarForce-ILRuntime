@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-#if FUCK_LUA
+#if ILRuntime
 using ILRuntime.CLR.TypeSystem;
 using ILRuntime.Reflection;
 using ILRuntime.Runtime.Intepreter;

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-#if FUCK_LUA
+#if ILRuntime
 using ILRuntime.CLR.Utils;
 using ILRuntime.Reflection;
 using ILRuntime.Runtime.Enviorment;
@@ -17,7 +17,7 @@ namespace CatJson
     public static class TypeUtil
     {
                 
-#if FUCK_LUA
+#if ILRuntime
         public static ILRuntime.Runtime.Enviorment.AppDomain AppDomain;
 #endif
         
@@ -26,7 +26,7 @@ namespace CatJson
         /// </summary>
         public static Type CheckType(Type type)
         {
-#if FUCK_LUA
+#if ILRuntime
             if (type is ILRuntimeWrapperType wt)
             {
                 return wt.RealType;
@@ -40,7 +40,7 @@ namespace CatJson
         /// </summary>
         public static bool TypeEquals(Type t1, Type t2)
         {
-#if FUCK_LUA
+#if ILRuntime
             t1 = CheckType(t1);
             t2 = CheckType(t2);
 #endif
@@ -52,7 +52,7 @@ namespace CatJson
         /// </summary>
         public static Type GetType(object obj)
         {
-#if FUCK_LUA
+#if ILRuntime
             if (obj is ILTypeInstance ins)
             {
                return ins.Type.ReflectionType;
@@ -70,7 +70,7 @@ namespace CatJson
         /// </summary>
         public static Type GetRealType(Type memberType, string realTypeValue)
         {
-#if FUCK_LUA
+#if ILRuntime
             if (memberType is ILRuntimeType ilrtType)
             {
                 return AppDomain.GetType(realTypeValue).ReflectionType;
@@ -85,7 +85,7 @@ namespace CatJson
         /// </summary>
         public static object CreateInstance(Type type)
         {
-#if FUCK_LUA
+#if ILRuntime
             if (type is ILRuntimeType ilrtType)
             {
                 return ilrtType.ILType.Instantiate();
@@ -150,7 +150,7 @@ namespace CatJson
             if (arrayType.IsArray)
             {
                 //数组
-#if FUCK_LUA
+#if ILRuntime
                 if (arrayType is ILRuntimeWrapperType wt)
                 {
                     elementType = wt.CLRType.ElementType.ReflectionType;
@@ -164,7 +164,7 @@ namespace CatJson
             else
             {
                 //List
-#if FUCK_LUA
+#if ILRuntime
                 if (arrayType is ILRuntimeWrapperType wt)
                 {
                     elementType = wt.CLRType.GenericArguments[0].Value.ReflectionType;
@@ -202,7 +202,7 @@ namespace CatJson
         public static Type GetDictValueType(Type dictType)
         {                       
             Type valueType;
-#if FUCK_LUA
+#if ILRuntime
             if (dictType is ILRuntimeWrapperType wt)
             {
                 valueType = wt.CLRType.GenericArguments[1].Value.ReflectionType;

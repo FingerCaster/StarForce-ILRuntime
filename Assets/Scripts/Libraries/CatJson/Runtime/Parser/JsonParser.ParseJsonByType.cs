@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-#if FUCK_LUA
+#if ILRuntime
 using ILRuntime.CLR.Utils;
 using ILRuntime.Reflection;
 using ILRuntime.Runtime.Intepreter;
@@ -157,7 +157,7 @@ namespace CatJson
                         return decimal.Parse(str);
                     }
                     
-#if FUCK_LUA
+#if ILRuntime
                     if (type is ILRuntimeType ilrtType && ilrtType.ILType.IsEnum)
                     {
                         //热更层枚举 
